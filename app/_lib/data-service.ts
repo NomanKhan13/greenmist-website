@@ -153,11 +153,11 @@ export async function bookingExist(bookingCode: string) {
   const { data: booking, error } = await supabase
     .from("bookings")
     .select(
-      "status, check_in, check_out, numAdults, properties!inner(name), roomType(name)",
+      "*, properties!inner(name, thumbnail), roomType(name, pricePerNight)",
     )
     .eq("booking_code", bookingCode)
     .single();
-  // console.log(booking.status);
+  console.log(booking);
 
   return booking;
 }
