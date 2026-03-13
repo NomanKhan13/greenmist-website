@@ -59,12 +59,6 @@ export default async function Properties({
   if (`/stays?${new URLSearchParams(query).toString()}` !== cannonicalUrl) {
     redirect(cannonicalUrl);
   }
-  console.log(
-    "Are both URL same? ",
-    `/stays?${new URLSearchParams(query).toString()}` === cannonicalUrl,
-  );
-  console.log("URL 1", `/stays?${new URLSearchParams(query).toString()}`);
-  console.log("URL 2", cannonicalUrl);
 
   return (
     <section className="py-24">

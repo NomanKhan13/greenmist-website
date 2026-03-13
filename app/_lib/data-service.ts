@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { supabase } from "./supabase";
+import { ReservationData } from "../_components/checkout/checkout";
 
 export async function getProperties() {
   const { data: properties, error } = await supabase
@@ -136,7 +137,9 @@ export async function checkAvailabilityByProperty(
   return availability;
 }
 
-export async function createBooking(bookingData) {
+export async function createBooking(bookingData: ReservationData) {
+  console.log("CHECK DATA TYPE", bookingData);
+
   const { data: booking, error } = await supabase
     .from("bookings")
     .insert([bookingData])

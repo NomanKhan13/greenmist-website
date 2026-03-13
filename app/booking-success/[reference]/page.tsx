@@ -1,110 +1,146 @@
 import { bookingExist } from "@/app/_lib/data-service";
 import {
   Calendar01Icon,
-  Check,
   Download,
-  MapPin,
+  Home01Icon,
+  UserGroup02FreeIcons,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { format } from "date-fns";
+import { format, differenceInDays } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 
-export default async function BookingSuccess({ params }) {
+type BookingSuccessProps = {
+  params: Promise<{
+    reference: string;
+  }>;
+};
+
+export default async function BookingSuccess({ params }: BookingSuccessProps) {
   const { reference } = await params;
-  console.log(reference);
-
   const bookingData = await bookingExist(reference);
-  console.log("bookingData", bookingData);
 
-  const formatedCheckIn = format(bookingData?.check_in, "MMM dd");
-  const formatedCheckOut = format(bookingData?.check_out, "MMM dd, yyyy");
-  console.log(formatedCheckIn);
+  // Safely extract names
+  const propertyName = bookingData?.properties?.[0]?.name;
+
+  const roomName = bookingData?.roomType?.[0]?.name;
+
+  // Date formatting and calculations
+  const checkInDate = bookingData?.check_in
+    ? new Date(bookingData.check_in)
+    : new Date();
+  const checkOutDate = bookingData?.check_out
+    ? new Date(bookingData.check_out)
+    : new Date();
+
+  const formatedCheckIn = format(checkInDate, "MMM dd");
+  const formatedCheckOut = format(checkOutDate, "MMM dd, yyyy");
+  const numNights = differenceInDays(checkOutDate, checkInDate);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center pt-20 p-6 relative overflow-hidden text-foreground">
-      {/* Background Image with Heavy Overlay */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        {/* Placeholder for hero image */}
-        <div className="w-full h-full bg-muted/20 bg-cover bg-center grayscale" />
+    <div className="min-h-screen relative flex items-center justify-center pt-24 pb-12 p-6 font-sans">
+      {/* Background Setup - Matching the dark theme with a subtle green glow */}
+      <div className="absolute inset-0 z-0 bg-[#0A0D0A] overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none opacity-50" />
       </div>
-      {/* Gradient fade using background color */}
-      <div className="absolute inset-0 z-0 bg-linear-to-t from-background via-background/90 to-background/60" />
 
-      {/* Content Card - Glassmorphism using 'card' variable */}
-      <div className="relative z-10 max-w-lg w-full bg-card/40 backdrop-blur-2xl border border-border p-4 sm:p-8 md:p-12 rounded-2xl text-center shadow-2xl animate-in fade-in zoom-in-95 duration-500">
-        {/* Success Icon - Uses Primary Color for Glow */}
-        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary/20 text-primary shadow-[0_0_30px_rgba(0,0,0,0)] shadow-primary/20">
-          <HugeiconsIcon
-            icon={Check}
-            size={32}
-            color="currentColor"
-            strokeWidth={1.5}
-          />
+      <div className="relative z-10 w-full max-w-lg animate-in fade-in slide-in-from-bottom-8 duration-700">
+        {/* Header - Matching "Secure Your Sanctuary" style */}
+        <div className="mb-8 text-center sm:text-left">
+          <p className="text-sm text-muted-foreground mb-2 tracking-wide uppercase">
+            Reservation Confirmed
+          </p>
+          <h1 className="text-4xl md:text-5xl font-serif text-white mb-3">
+            Your Sanctuary Awaits
+          </h1>
+          <p className="text-white/60">
+            Booking reference{" "}
+            <span className="text-white font-medium">#{reference}</span>
+          </p>
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-serif text-foreground mb-2">
-          You are going to Munnar.
-        </h1>
-        <p className="text-muted-foreground mb-8">
-          Reservation #{reference} confirmed.
-        </p>
-
-        {/* Itinerary Snippet */}
-        <div className="bg-muted/30 rounded-xl p-6 mb-8 border border-border text-left space-y-4">
-          <div className="flex items-start gap-4">
-            <div className="mt-1 text-muted-foreground">
-              <HugeiconsIcon
-                icon={MapPin}
-                size={16}
-                color="currentColor"
-                strokeWidth={1.5}
-              />
+        {/* Main Summary Card - Mirroring the Checkout Right Panel */}
+        <div className="bg-[#111312]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 sm:p-8 shadow-2xl">
+          {/* Property Info */}
+          <div className="flex items-center gap-4 mb-8">
+            {/* Placeholder for Property Image (Matches checkout thumbnail) */}
+            <div className="w-16 h-16 rounded-lg bg-white/5 border border-white/10 flex-shrink-0 overflow-hidden relative">
+              {/* <Image src={...} alt="..." fill className="object-cover" /> */}
+              <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent" />
             </div>
             <div>
-              <p className="text-foreground font-medium">
-                {bookingData?.properties?.name}
+              <p className="text-[10px] text-primary font-bold tracking-widest uppercase mb-1">
+                Property
               </p>
-              <p className="text-sm text-muted-foreground">
-                {bookingData?.roomType?.name} • {bookingData?.numAdults} Guests
-              </p>
+              <h2 className="text-lg font-serif text-white">{propertyName}</h2>
+              <p className="text-xs text-white/50">Munnar, Kerala</p>
             </div>
           </div>
-          <div className="flex items-start gap-4">
-            <div className="mt-1 text-muted-foreground">
-              <HugeiconsIcon
-                icon={Calendar01Icon}
-                size={16}
-                color="currentColor"
-                strokeWidth={1.5}
-              />
+
+          {/* Booking Details Box - Mirroring the Drawer layout */}
+          <div className="border border-white/10 bg-white/5 rounded-xl p-5 space-y-5 mb-8">
+            {/* Dates */}
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3 text-white/60">
+                <HugeiconsIcon
+                  icon={Calendar01Icon}
+                  size={18}
+                  strokeWidth={1.5}
+                />
+                <span className="text-sm">Dates</span>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-medium text-white">
+                  {formatedCheckIn} - {formatedCheckOut}
+                </p>
+                <p className="text-xs text-white/50 mt-0.5">
+                  ({numNights} Nights)
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-foreground font-medium">
-                {formatedCheckIn} - {formatedCheckOut}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Check-in after 12:00 PM
-              </p>
+
+            {/* Guests */}
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3 text-white/60">
+                <HugeiconsIcon
+                  icon={UserGroup02FreeIcons}
+                  size={18}
+                  strokeWidth={1.5}
+                />
+                <span className="text-sm">Guests</span>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-medium text-white">
+                  {bookingData?.numAdults} Adult
+                  {bookingData?.numAdults > 1 ? "s" : ""}
+                </p>
+                <p className="text-xs text-white/50 mt-0.5">(1 room)</p>
+              </div>
+            </div>
+
+            {/* Room */}
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3 text-white/60">
+                <HugeiconsIcon icon={Home01Icon} size={18} strokeWidth={1.5} />
+                <span className="text-sm">Room</span>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-medium text-white">{roomName}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className="flex flex-col gap-3">
-          {/* Primary Action */}
-          <button className="w-full bg-primary text-primary-foreground py-3 rounded-md hover:bg-primary/90 transition font-medium shadow-lg shadow-primary/10">
-            Manage Reservation
-          </button>
+          {/* Action Buttons */}
+          <div className="flex flex-col gap-3">
+            <button className="w-full bg-primary text-black py-4 rounded-lg hover:bg-primary/90 transition-all font-medium text-sm flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+              Manage Reservation
+            </button>
 
-          {/* Secondary Action */}
-          <button className="w-full bg-transparent border border-border text-muted-foreground py-3 rounded-md hover:bg-muted/50 hover:text-foreground transition flex items-center justify-center gap-2">
-            <HugeiconsIcon
-              icon={Download}
-              size={16}
-              color="currentColor"
-              strokeWidth={1.5}
-            />{" "}
-            Download Receipt
-          </button>
+            <button className="w-full bg-transparent border border-white/10 text-white/80 py-4 rounded-lg hover:bg-white/5 hover:text-white transition-colors font-medium text-sm flex items-center justify-center gap-2">
+              <HugeiconsIcon icon={Download} size={18} strokeWidth={1.5} />
+              Download Receipt
+            </button>
+          </div>
         </div>
       </div>
     </div>

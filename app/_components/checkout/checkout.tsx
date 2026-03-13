@@ -41,6 +41,24 @@ type UserActionProps =
   | { type: "change-email"; data: string }
   | { type: "change-observations"; data: string };
 
+export type ReservationData = {
+  numNights: number;
+  observations: string;
+  numAdults: number;
+  roomsCount: number;
+  basePriceAtBooking: number;
+  addOnsAtBooking: number;
+  totalPriceAtBooking: number;
+  room_type_id: string;
+  check_in: Date;
+  check_out: Date;
+  property_id: string;
+  booking_code: string;
+  status: string;
+  isPaid: boolean;
+  guestId: string | null;
+};
+
 // ================= REDUCER =================
 
 const initialState: UserDetailsProps = {

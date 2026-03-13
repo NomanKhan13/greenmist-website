@@ -3,8 +3,14 @@ import { customAlphabet } from "nanoid/non-secure";
 import { bookingExist, createBooking } from "./data-service";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { ReservationData } from "../_components/checkout/checkout";
 
-export async function createBookingAction(bookingData, formData) {
+export async function createBookingAction(
+  bookingData: Omit<
+    ReservationData,
+    "booking_code" | "status" | "isPaid" | "guestId"
+  >,
+) {
   const generateBookingCode = customAlphabet(
     "23456789ABCDEFGHJKLMNPQRSTUVWXYZ",
     6,
