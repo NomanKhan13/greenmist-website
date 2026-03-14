@@ -49,7 +49,7 @@ export default function PropertyCard({
         </div>
       )}
       <div className="w-full lg:w-1/2 relative overflow-hidden">
-        <div className="aspect-4/3 lg:aspect-video overflow-hidden relative">
+        <div className="aspect-4/3 lg:aspect-auto overflow-hidden">
           <Image
             fill
             src={`${SUPABASE_BASE_IMG_URL}${property.thumbnail}`}

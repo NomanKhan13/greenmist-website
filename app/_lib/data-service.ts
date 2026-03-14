@@ -39,8 +39,6 @@ export async function getRoomDetails(roomSlug: string | undefined | null) {
   if (error) throw new Error("Failed to load room details");
   if (!roomDetails) notFound();
 
-  console.log(`room details is ${roomSlug}`);
-
   return roomDetails;
 }
 
@@ -71,13 +69,7 @@ export async function checkAvailability(
       "Each adult can accompany up to 2 children. Please adjust your guest count.",
     );
   }
-  console.log(
-    "CHECK AVAILABILITY CALLED",
-    checkIn,
-    checkOut,
-    guests,
-    targetRoomId ?? null,
-  );
+
   const { data: availability, error } = await supabase.rpc(
     "check_rooms_availability",
     {
@@ -88,7 +80,6 @@ export async function checkAvailability(
     },
   );
   if (error) throw new Error("Failed to check availability");
-  console.log("FROM data service ", availability);
   return availability;
 }
 
@@ -106,14 +97,6 @@ export async function checkAvailabilityByProperty(
    * So, if the number of children exceeds twice the number of adults, we should throw an error.
    */
 
-  console.log(
-    "CHECK AVAILABILITY CALLED",
-    checkIn,
-    checkOut,
-    guests,
-    propertySlug,
-    targetRoomId ?? null,
-  );
   // const { data: availability, error } = await supabase.rpc("available_rooms", {
   //   check_in_date: checkIn,
   //   check_out_date: checkOut,
@@ -138,8 +121,6 @@ export async function checkAvailabilityByProperty(
 }
 
 export async function createBooking(bookingData: ReservationData) {
-  console.log("CHECK DATA TYPE", bookingData);
-
   const { data: booking, error } = await supabase
     .from("bookings")
     .insert([bookingData])
@@ -157,7 +138,6 @@ export async function bookingExist(bookingCode: string) {
     )
     .eq("booking_code", bookingCode)
     .single();
-  console.log(booking);
 
   return booking;
 }

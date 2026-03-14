@@ -21,23 +21,19 @@ export default function PropertyHero({
 }) {
   return (
     <div className="relative h-[85vh] w-full">
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute left-0 top-0 w-full h-full">
         <Image
           fill
           src={`${SUPABASE_IMG_BASE_URL}${thumbnail}`}
           alt={name}
-          className="object-cover"
+          className="object-cover object-right lg:object-center"
           priority
         />
         <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/90" />
       </div>
 
-      <div className="absolute top-8 left-4 md:top-24 md:left-24 z-20">
-        <Button
-          variant="ghost"
-          className="text-stone-50 hover:bg-stone-50text-stone-50/20 hover:text-stone-50 border border-stone-50text-stone-50/20 backdrop-blur-sm rounded-full px-4 md:px-6 transition-all"
-          asChild
-        >
+      <div className="absolute top-8 left-8 md:top-24 md:left-24 z-20">
+        <Button variant="ghost" asChild>
           <Link href="/stays" className="flex items-center gap-2">
             <HugeiconsIcon icon={ArrowLeft02Icon} size={16} strokeWidth={2} />
             <span className="tracking-wide text-[0.65rem] md:text-xs uppercase font-medium">

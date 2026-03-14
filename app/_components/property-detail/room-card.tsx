@@ -37,7 +37,7 @@ export default function RoomCard({
         </div>
       )}
       {/* Image Section */}
-      <div className="w-full lg:w-1/2 overflow-hidden">
+      <div className="w-full lg:w-1/2 relative overflow-hidden">
         <div className="aspect-4/3 lg:aspect-auto lg:h-full w-full relative">
           <Image
             fill

@@ -30,7 +30,7 @@ export default async function PropertyDetailPage({
     : String(query?.["room"]);
 
   return (
-    <main className="min-h-screen bg-background text-foreground pb-32">
+    <section className="min-h-screen bg-background text-foreground pb-32">
       <PropertyHero
         name={propertyDetails?.name}
         location={propertyDetails?.location}
@@ -49,6 +49,6 @@ export default async function PropertyDetailPage({
 
         <PropertyHighlights highlights={propertyDetails.highlights} />
       </div>
-    </main>
+    </section>
   );
 }

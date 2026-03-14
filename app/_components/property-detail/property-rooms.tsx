@@ -1,5 +1,7 @@
 import RoomsList from "./rooms-list";
 import { BookingStrip } from "../booking-strip/booking-strip";
+import { Suspense } from "react";
+import GreenMistLoaderMini from "../greenmist-loader-mini";
 
 export default async function PropertyRooms({
   propertySlug,
@@ -33,13 +35,15 @@ export default async function PropertyRooms({
           defaultCheckOut={initialCheckOut}
         />
       </div>
-      <RoomsList
-        propertySlug={propertySlug}
-        selectedRoomSlug={selectedRoomSlug}
-        checkIn={initialCheckIn}
-        checkOut={initialCheckOut}
-        guests={initialGuest}
-      />
+      <Suspense fallback={<GreenMistLoaderMini />}>
+        <RoomsList
+          propertySlug={propertySlug}
+          selectedRoomSlug={selectedRoomSlug}
+          checkIn={initialCheckIn}
+          checkOut={initialCheckOut}
+          guests={initialGuest}
+        />
+      </Suspense>
     </div>
   );
 }

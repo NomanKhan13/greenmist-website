@@ -60,8 +60,6 @@ export default async function Properties({
     redirect(cannonicalUrl);
   }
 
-  const suspenseKey = JSON.stringify(searchParams);
-
   return (
     <section className="pt-24">
       <div className="max-w-7xl mx-auto px-4">
@@ -72,7 +70,7 @@ export default async function Properties({
           surroundings."
         />
         <BookingStrip defaultCheckIn={checkIn} defaultCheckOut={checkOut} />
-        <Suspense key={suspenseKey} fallback={<GreenMistLoaderMini />}>
+        <Suspense key="/stays" fallback={<GreenMistLoaderMini />}>
           <PropertyGrid data={stayOptionsBookingData} />
         </Suspense>
       </div>
