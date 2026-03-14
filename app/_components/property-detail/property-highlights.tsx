@@ -6,7 +6,6 @@ export default function PropertyHighlights({
 }: {
   highlights: string[];
 }) {
-  console.log("Lets check this", highlights);
   return (
     <div className="bg-secondary/30 dark:bg-card/30 rounded-3xl p-8 md:p-16 border border-border/50">
       <div className="text-center mb-12">

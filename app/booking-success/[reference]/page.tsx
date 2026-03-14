@@ -20,7 +20,6 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
   const bookingData = await bookingExist(reference);
   const propertyName = bookingData?.properties?.name;
   const roomName = bookingData?.roomType?.name;
-  console.log("The room type is", bookingData?.properties?.name);
 
   const checkInDate = bookingData?.check_in
     ? new Date(bookingData.check_in)

@@ -37,7 +37,7 @@ export default async function PropertyDetailPage({
         thumbnail={propertyDetails?.thumbnail}
         startsFrom={propertyDetails?.startsFrom}
       />
-      <div className="max-w-7xl mx-auto mt-16 px-6 md:px-12 grid gap-16 md:gap-32 lg:gap-40">
+      <div className="max-w-7xl mx-auto mt-16 px-4 md:px-12 grid gap-16 md:gap-32 lg:gap-40">
         <PropertyIntro description={propertyDetails.description} />
         <PropertyRooms
           initialCheckIn={checkIn}

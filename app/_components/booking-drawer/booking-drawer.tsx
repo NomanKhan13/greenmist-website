@@ -61,8 +61,6 @@ export default function BookingSheet({
       roomDetails?.max_kids,
     ) || 0;
 
-  console.log("Rooms req: ", roomsRequired);
-
   const {
     selectedAddons,
     formattedCheckIn,
@@ -102,13 +100,16 @@ export default function BookingSheet({
 
   return (
     <Sheet open={isOpen} onOpenChange={toggleDrawer}>
-      <SheetContent side="right">
+      <SheetContent
+        side="right"
+        className="w-full sm:max-w-md md:max-w-lg lg:max-w-150"
+      >
         {/* HEADER */}
         <SheetHeader>
-          <SheetTitle className="text-2xl font-serif text-foreground">
+          <SheetTitle className="text-2xl md:text-3xl font-serif text-foreground">
             Your Stay
           </SheetTitle>
-          <p className="text-xs text-muted-foreground uppercase tracking-widest">
+          <p className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest">
             Confirm Details
           </p>
         </SheetHeader>

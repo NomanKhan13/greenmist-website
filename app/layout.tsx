@@ -29,14 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={figtree.variable}>
+    <html lang="en" data-scroll-behavior="smooth" className={figtree.variable}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <BookingProvider>
             <Header />
-            {children}
+            <main className="min-h-screen">{children}</main>
             <Footer />
           </BookingProvider>
         </ThemeProvider>

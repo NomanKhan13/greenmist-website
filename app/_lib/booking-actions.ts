@@ -42,7 +42,7 @@ export async function createBookingAction(
   };
 
   const { booking, error } = await createBooking(mergedBookingData);
-  console.log(error);
+
   if (error) throw new Error("Booking could not be created");
   // do this later
   // revalidatePath(`/stays/${bookingData.slug}`)

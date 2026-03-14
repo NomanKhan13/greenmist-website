@@ -62,7 +62,6 @@ export default async function RoomsList({
   selectedRoom = roomTypes.find(
     (r: RoomDetails) => r.slug === selectedRoomSlug && r.is_available,
   );
-  console.log("Selected room: ", selectedRoom);
 
   return (
     <div className="flex flex-col scroll-m-32" id="room-collection-section">

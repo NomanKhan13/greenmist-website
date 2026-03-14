@@ -61,7 +61,7 @@ export function BookingStrip({
     guestCount?.adults <= 0;
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-6">
+    <div className="w-full max-w-4xl mx-auto">
       <div
         className="
     flex flex-col lg:flex-row items-stretch gap-0 overflow-hidden

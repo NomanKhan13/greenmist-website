@@ -17,7 +17,6 @@ export function formatter(price: number) {
 
 export default async function PropertyHighlights() {
   const stays = await getProperties();
-  console.log(stays);
 
   return (
     <section className="py-24 md:py-32 bg-background">

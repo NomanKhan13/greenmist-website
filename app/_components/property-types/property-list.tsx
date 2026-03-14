@@ -21,8 +21,6 @@ export type PropertyProps = {
 };
 
 async function PropertyGrid({ data }: { data: StayOptionsBookingProps }) {
-  console.log("Check stay data", data);
-
   const [properties, availability] = await Promise.all([
     getProperties(),
     checkAvailabilityByProperty(data.checkIn, data.checkOut, {
@@ -37,7 +35,6 @@ async function PropertyGrid({ data }: { data: StayOptionsBookingProps }) {
       .map((a: RoomDetails) => a.property_slug),
   );
 
-  console.log("Check stay data", data);
   const params = new URLSearchParams({
     checkIn: format(data.checkIn, "yyyy-MM-dd"),
     checkOut: format(data.checkOut, "yyyy-MM-dd"),
@@ -48,7 +45,7 @@ async function PropertyGrid({ data }: { data: StayOptionsBookingProps }) {
   const queryString = params.toString();
 
   return (
-    <section className="px-6 pb-20 md:pb-32 pt-8">
+    <section className="pt-20 md:pt-32">
       <div className="grid">
         {properties.map((property: PropertyProps, idx: number) => {
           const isAvailable = availabileProperties.has(property.slug);

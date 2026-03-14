@@ -4,6 +4,7 @@ import Link from "next/link";
 // import logo from "@/public/greenmist.png";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Mountain, User02Icon } from "@hugeicons/core-free-icons";
+import { MobileMenu } from "./mobile-menu";
 
 export default function Header() {
   return (
@@ -49,6 +50,9 @@ export default function Header() {
           </Button>
 
           {/* Mobile Menu Trigger would go here */}
+          <div className="block md:hidden">
+            <MobileMenu />
+          </div>
         </div>
       </div>
     </header>
@@ -56,7 +60,7 @@ export default function Header() {
 }
 
 // Helper Component for consistent luxury links
-function NavLink({
+export function NavLink({
   href,
   children,
 }: {
@@ -69,7 +73,6 @@ function NavLink({
       className="text-xs uppercase tracking-widest font-medium text-secondary-foreground/75 dark:text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
     >
       {children}
-      {/* Subtle underline animation on hover */}
       <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full opacity-50" />
     </Link>
   );

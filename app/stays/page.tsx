@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 
 import SectionHeader from "../_components/section-header";
-import GreenMistLoader from "../_components/greenmist-loader";
 import PropertyGrid from "../_components/property-types/property-list";
 import { sanitizeCheckoutQuery } from "../checkout/page";
 import { getValidDates } from "../_utils/validation";
 import { format } from "date-fns";
 import { redirect } from "next/navigation";
 import { BookingStrip } from "../_components/booking-strip/booking-strip";
+import GreenMistLoaderMini from "../_components/greenmist-loader-mini";
 
 export type StayOptionsBookingProps = {
   checkIn: Date;
@@ -60,9 +60,11 @@ export default async function Properties({
     redirect(cannonicalUrl);
   }
 
+  const suspenseKey = JSON.stringify(searchParams);
+
   return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto">
+    <section className="pt-24">
+      <div className="max-w-7xl mx-auto px-4">
         <SectionHeader
           subHeading="Munnar, kerala"
           heading="Our Properties"
@@ -70,7 +72,7 @@ export default async function Properties({
           surroundings."
         />
         <BookingStrip defaultCheckIn={checkIn} defaultCheckOut={checkOut} />
-        <Suspense fallback={<GreenMistLoader />}>
+        <Suspense key={suspenseKey} fallback={<GreenMistLoaderMini />}>
           <PropertyGrid data={stayOptionsBookingData} />
         </Suspense>
       </div>

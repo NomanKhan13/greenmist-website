@@ -37,7 +37,7 @@ export default function PropertyCard({
 
   return (
     <div
-      className={`relative flex flex-col overflow-hidden shadow-md rounded-2xl ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} items-stretch gap-0 mb-24 group/card`}
+      className={`relative flex flex-col overflow-hidden shadow-md rounded-2xl ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} items-stretch gap-0 mb-10 group/card`}
     >
       {!isAvailable && (
         <div
@@ -49,7 +49,7 @@ export default function PropertyCard({
         </div>
       )}
       <div className="w-full lg:w-1/2 relative overflow-hidden">
-        <div className="aspect-4/3 lg:aspect-video overflow-hidden">
+        <div className="aspect-4/3 lg:aspect-video overflow-hidden relative">
           <Image
             fill
             src={`${SUPABASE_BASE_IMG_URL}${property.thumbnail}`}
@@ -81,10 +81,10 @@ export default function PropertyCard({
           <p className="text-xs uppercase tracking-widest mb-3 text-foreground">
             {`What's special?`}
           </p>
-          <div className="flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted-foreground/80 leading-relaxed border-t border-border/50 pt-4 mb-8">
+          <div className="grid grid-cols-2 sm:flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted-foreground/80 leading-relaxed border-t border-border/50 pt-4 mb-8">
             {property.highlights.map((highlight, idx) => (
               <div key={highlight} className="flex items-center">
-                {idx > 0 && <span className="text-border mr-3">•</span>}
+                <span className="text-border mr-3">•</span>
                 <span>{highlight}</span>
               </div>
             ))}

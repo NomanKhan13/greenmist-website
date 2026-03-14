@@ -45,13 +45,11 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="w-full max-w-4xl ">
-          <BookingStrip
-            defaultCheckIn={checkIn}
-            defaultCheckOut={checkOut}
-            navigateToPage="stays"
-          />
-        </div>
+        <BookingStrip
+          defaultCheckIn={checkIn}
+          defaultCheckOut={checkOut}
+          navigateToPage="stays"
+        />
       </div>
     </section>
   );
