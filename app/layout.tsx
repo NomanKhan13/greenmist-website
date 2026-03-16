@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" className={figtree.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary selection:text-primary-foreground`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <BookingProvider>

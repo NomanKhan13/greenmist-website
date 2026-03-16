@@ -299,7 +299,7 @@ export function CheckoutSummaryCard({
   return (
     <div className="sticky top-12">
       {/* Glass Card Effect using sematic variables */}
-      <div className="bg-card/40 backdrop-blur-xl border border-border p-8 rounded-2xl shadow-2xl">
+      <div className="bg-card/40 backdrop-blur-xl border border-border p-4 sm:p-8 rounded-2xl shadow-2xl">
         {/* Property Context */}
         <div className="flex gap-4 mb-4">
           <div className="w-20 h-20 bg-muted rounded-lg overflow-hidden relative">
@@ -313,13 +313,15 @@ export function CheckoutSummaryCard({
             {/* <div className="absolute inset-0 bg-muted/80" /> */}
           </div>
           <div>
-            <p className="text-xs text-primary font-bold tracking-wider uppercase mb-1">
+            <p className="text-[10px] sm:text-xs text-primary font-bold tracking-wider uppercase mb-1">
               Property
             </p>
-            <h3 className="font-serif text-xl text-foreground leading-tight">
+            <h3 className="font-serif text-lg sm:text-xl text-foreground leading-tight">
               {roomData.property_name}
             </h3>
-            <p className="text-sm text-muted-foreground mt-1">Munnar, Kerela</p>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+              Munnar, Kerela
+            </p>
           </div>
         </div>
 

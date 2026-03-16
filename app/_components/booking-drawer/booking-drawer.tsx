@@ -105,7 +105,7 @@ export default function BookingSheet({
         className="w-full sm:max-w-md md:max-w-lg lg:max-w-150"
       >
         {/* HEADER */}
-        <SheetHeader>
+        <SheetHeader className="p-4 sm:p-6">
           <SheetTitle className="text-2xl md:text-3xl font-serif text-foreground">
             Your Stay
           </SheetTitle>
@@ -116,9 +116,9 @@ export default function BookingSheet({
 
         {/* SCROLLABLE BODY */}
         <ScrollArea className="flex-1 h-96">
-          <div className="space-y-8 p-6">
+          <div className="space-y-8 p-4 sm:p-6">
             {/* 1. Trip Summary Card */}
-            <div className="bg-muted/30 rounded-xl p-5 border border-border/50 space-y-4">
+            <div className="bg-muted/30 rounded-xl p-2.5 sm:p-5 border border-border/50 space-y-4">
               <SummaryRow
                 icon={Calendar03Icon}
                 label="Dates"
@@ -170,7 +170,7 @@ export default function BookingSheet({
                         onClick={() => toggleAddon(addon.slug)}
                         className={`
                           relative cursor-pointer group select-none
-                          flex items-start gap-4 p-4 rounded-xl border transition-all duration-300
+                          flex items-start gap-4 p-3 sm:p-4 rounded-xl border transition-all duration-300
                           ${
                             isSelected
                               ? "bg-primary/5 border-primary shadow-[0_0_15px_rgba(var(--primary),0.1)]"
@@ -200,7 +200,7 @@ export default function BookingSheet({
 
                         {/* Text Content */}
                         <div className="flex-1">
-                          <div className="flex justify-between items-start">
+                          <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 mb-3 sm:mb-0 justify-between items-start">
                             <h4
                               className={`text-sm font-medium ${isSelected ? "text-primary" : "text-foreground"}`}
                             >
@@ -275,10 +275,10 @@ export default function BookingSheet({
         </ScrollArea>
 
         {/* FOOTER */}
-        <SheetFooter className="p-6 border-t border-border bg-background sm:justify-center z-10">
+        <SheetFooter className="p-3 sm:p-6 border-t border-border bg-background sm:justify-center z-10">
           <div className="w-full space-y-3">
             <Button
-              className="w-full py-7 rounded-lg flex items-center justify-between px-6 shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-7 rounded-lg flex items-center justify-between px-3 sm:px-6 shadow-lg hover:shadow-xl transition-all"
               size="lg"
               onClick={handleProceedToCheckout}
             >

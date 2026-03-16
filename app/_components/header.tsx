@@ -29,8 +29,8 @@ export default function Header() {
 
         <nav className="hidden md:flex items-center gap-10">
           <NavLink href="/stays">Stays</NavLink>
-          <NavLink href="/#about">The Estate</NavLink>
-          <NavLink href="/#experiences">Experiences</NavLink>
+          <NavLink href="/estate">The Estate</NavLink>
+          <NavLink href="/experiences">Experiences</NavLink>
         </nav>
 
         <div className="flex items-center gap-4">
