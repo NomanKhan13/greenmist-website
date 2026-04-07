@@ -1,9 +1,10 @@
+import { PriceRow, SummaryRow } from "@/app/_components/checkout/checkout";
 import { bookingExist } from "@/app/_lib/data-service";
 import {
   Calendar01Icon,
   Download,
-  Home01Icon,
-  UserGroup02FreeIcons,
+  Home04Icon,
+  UserGroupIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { format, differenceInDays } from "date-fns";
@@ -14,6 +15,14 @@ type BookingSuccessProps = {
     reference: string;
   }>;
 };
+
+export const formatCurrency = (amount: number) =>
+  new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(amount);
+
 const SUPABASE_BASE_IMG_URL = process.env.NEXT_PUBLIC_SUPABASE_BASE_IMG_URL;
 export default async function BookingSuccess({ params }: BookingSuccessProps) {
   const { reference } = await params;
@@ -28,16 +37,9 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
     ? new Date(bookingData.check_out)
     : new Date();
 
-  const formatedCheckIn = format(checkInDate, "MMM dd");
-  const formatedCheckOut = format(checkOutDate, "MMM dd, yyyy");
+  const formattedCheckIn = format(checkInDate, "MMM dd");
+  const formattedCheckOut = format(checkOutDate, "MMM dd, yyyy");
   const numNights = differenceInDays(checkOutDate, checkInDate) || 1;
-
-  const formatCurrency = (amount: number) =>
-    new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(amount);
 
   return (
     <div className="min-h-screen relative flex items-center justify-center px-6 pt-24 pb-12 bg-background">
@@ -62,7 +64,7 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
         </div>
 
         {/* Main Summary Card */}
-        <div className="bg-card/80 backdrop-blur-md border border-border rounded-2xl p-6 sm:p-8 shadow-2xl">
+        <div className="bg-card/40 backdrop-blur-md border border-border rounded-2xl py-6 px-4 sm:px-8 shadow-2xl">
           {/* Property Info */}
           <div className="flex items-center gap-4 mb-8">
             <div className="size-16 rounded-lg bg-secondary/50 border border-border/50 shrink-0 overflow-hidden relative">
@@ -85,58 +87,41 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
           </div>
 
           {/* Booking Details Box */}
-          <div className="border border-border/50 bg-secondary/30 rounded-xl p-5 space-y-5 mb-8">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <HugeiconsIcon
-                  icon={Calendar01Icon}
-                  size={18}
-                  strokeWidth={1.5}
-                />
-                <span className="text-sm">Dates</span>
-              </div>
-              <div className="text-right">
-                <p className="text-sm font-medium text-foreground">
-                  {formatedCheckIn} - {formatedCheckOut}
-                </p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  ({numNights} Nights)
-                </p>
-              </div>
-            </div>
+          <div className="border border-border/50 bg-muted/30 rounded-xl p-5 space-y-4 mb-8">
+            <SummaryRow
+              icon={Calendar01Icon}
+              label="Dates"
+              value={
+                <span className="flex flex-col text-right leading-tight">
+                  <span>
+                    {formattedCheckIn} - {formattedCheckOut}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground font-normal">
+                    ({numNights} {numNights > 1 ? "Nights" : "Night"})
+                  </span>
+                </span>
+              }
+            />
 
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <HugeiconsIcon
-                  icon={UserGroup02FreeIcons}
-                  size={18}
-                  strokeWidth={1.5}
-                />
-                <span className="text-sm">Guests</span>
-              </div>
-              <div className="text-right">
-                <p className="text-sm font-medium text-foreground">
-                  {bookingData?.numAdults} Adult
-                  {bookingData?.numAdults > 1 ? "s" : ""}
-                </p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  ({bookingData.roomsCount} room
-                  {bookingData.roomsCount > 1 ? "s" : ""})
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <HugeiconsIcon icon={Home01Icon} size={18} strokeWidth={1.5} />
-                <span className="text-sm">Room</span>
-              </div>
-              <div className="text-right">
-                <p className="text-sm font-medium text-foreground">
-                  {roomName}
-                </p>
-              </div>
-            </div>
+            <SummaryRow
+              icon={UserGroupIcon}
+              label="Guests"
+              value={
+                <span className="flex flex-col text-right leading-tight">
+                  <span>
+                    {`${bookingData.numAdults} Adults` +
+                      (bookingData?.numKids > 0
+                        ? `, ${bookingData.numKids} Kids`
+                        : "")}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground font-normal">
+                    ({bookingData.roomsCount}{" "}
+                    {bookingData.roomsCount > 1 ? "rooms" : "room"})
+                  </span>
+                </span>
+              }
+            />
+            <SummaryRow icon={Home04Icon} label="Room" value={roomName} />
           </div>
 
           {/* Price Breakdown Section */}
@@ -144,20 +129,13 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
             <h3 className="text-sm font-medium text-foreground mb-4">
               Price Breakdown
             </h3>
-            <div className="space-y-3 text-sm">
-              <div className="flex justify-between text-muted-foreground">
-                <span>
-                  {formatCurrency(bookingData.basePriceAtBooking)} per night x{" "}
-                  {numNights} night
-                  {numNights > 1 ? "s" : ""} x {bookingData.roomsCount} room
-                  {bookingData.roomsCount > 1 ? "s" : ""}
-                </span>
-                <span className="text-foreground">
-                  {formatCurrency(bookingData.roomType.pricePerNight)}
-                </span>
-              </div>
+            <div className="space-y-2 text-sm">
+              <PriceRow
+                label={`${formatCurrency(bookingData.basePriceAtBooking)} x ${numNights} ${numNights > 1 ? "nights" : "night"}`}
+                value={formatCurrency(bookingData.roomType.pricePerNight)}
+              />
 
-              <div className="flex justify-between text-primary text-xs">
+              <div className="-mt-1 flex justify-between text-primary text-xs">
                 <span>+ Add Ons</span>
                 <span>{formatCurrency(bookingData.addOnsAtBooking)}</span>
               </div>

@@ -8,11 +8,11 @@ const SectionHeader = ({
   description: string;
 }) => {
   return (
-    <section className="text-center max-w-2xl mx-auto mb-20">
-      <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-4">
+    <section className="text-center max-w-2xl mx-auto mb-8">
+      <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-2">
         {subHeading}
       </h2>
-      <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
+      <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
         {heading}
       </h1>
       <p className="text-muted-foreground">{description}</p>

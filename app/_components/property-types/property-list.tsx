@@ -45,7 +45,7 @@ async function PropertyGrid({ data }: { data: StayOptionsBookingProps }) {
   const queryString = params.toString();
 
   return (
-    <section className="pt-20 md:pt-32">
+    <section className="pt-10 md:pt-16">
       <div className="grid">
         {properties.map((property: PropertyProps, idx: number) => {
           const isAvailable = availabileProperties.has(property.slug);

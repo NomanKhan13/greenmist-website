@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RoomDetails } from "./rooms-list";
 import useRoomSelection from "./useRoomSelection";
+import clsx from "clsx";
 
 export default function RoomCard({
   room,
@@ -23,19 +24,26 @@ export default function RoomCard({
 
   return (
     <div
-      className={`relative flex flex-col ${
-        isEven ? "lg:flex-row" : "lg:flex-row-reverse"
-      } overflow-hidden rounded-3xl bg-secondary dark:bg-card/40 border ${isRoomSelected ? "border-primary/40" : "border-border/40"} group mb-20`}
+      className={clsx(
+        `relative flex flex-col overflow-hidden rounded-3xl border transition-all duration-300 group mb-20`,
+        isEven ? "lg:flex-row" : "lg:flex-row-reverse",
+        isRoomSelected
+          ? "border-primary/30 bg-linear-to-br from-primary/15 via-primary/5 to-transparent shadow-sm"
+          : "border-border/40 bg-secondary dark:bg-card/40 hover:border-border/80",
+      )}
     >
       {!room.is_available && (
         <div
-          className={`absolute inset-0 z-20 bg-black/50 p-8 flex ${isEven ? "justify-start" : "justify-end"}`}
+          className={`absolute inset-0 z-20 bg-black/50 p-8 flex ${
+            isEven ? "justify-start" : "justify-end"
+          }`}
         >
           <Badge variant="secondary" className="p-4 text-sm">
             Sold out
           </Badge>
         </div>
       )}
+
       {/* Image Section */}
       <div className="w-full lg:w-1/2 relative overflow-hidden">
         <div className="aspect-4/3 lg:aspect-auto lg:h-full w-full relative">
@@ -70,14 +78,13 @@ export default function RoomCard({
           <div className="flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted-foreground/80 border-t border-border/50 pt-6 mb-8">
             <span>{room.max_adults} Adults</span>
             <span className="text-border">•</span>
+            <span>{Number(room.max_kids) || "N/A"} Kids</span>
+            <span className="text-border">•</span>
             <span>{room.size} sqft</span>
             <span className="text-border">•</span>
             <span>
               {room.bed_count} {room.bed_type}
             </span>
-            <span className="text-border">•</span>
-
-            <span>{room.amenities?.[0]}</span>
           </div>
 
           {/* Footer: Price + CTA */}
@@ -95,7 +102,11 @@ export default function RoomCard({
             </div>
 
             <Button
-              className={`group/cta p-6  ${isRoomSelected ? "bg-primary text-primary-foreground" : "bg-foreground text-background hover:"}`}
+              className={`group/cta p-6 transition-all ${
+                isRoomSelected
+                  ? "bg-primary text-primary-foreground shadow-md"
+                  : "bg-foreground text-background"
+              }`}
               disabled={!room.is_available}
               onClick={toggleRoomSelect}
             >

@@ -19,13 +19,7 @@ export default function Hero() {
       />
 
       {/* Note - Add this kind of bg so that sudden vibe change from image to black bg doesnt happen */}
-      <div
-        className="absolute inset-0 z-0 bg-linear-to-b from-black/60 via-transparent pb-0 to-background"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 60%, var(--background) 100%)",
-        }}
-      />
+      <div className="absolute inset-0 z-0 bg-linear-to-b from-black/60 from-0% via-black/20 via-60% to-background to-100%" />
       {/* Note - Used hard coded colors and not globals.css bcz we want same colors on img on both dark and light modes */}
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-8 mt-32 lg:mt-16">
         <div className="mb-6 flex items-center space-x-2 text-stone-50/90 text-sm tracking-widest uppercase font-medium">

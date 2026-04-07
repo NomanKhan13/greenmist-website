@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { redirect } from "next/navigation";
 import { BookingStrip } from "../_components/booking-strip/booking-strip";
 import GreenMistLoaderMini from "../_components/greenmist-loader-mini";
+import StepCounter from "../_components/step-counter";
 
 export type StayOptionsBookingProps = {
   checkIn: Date;
@@ -36,6 +37,7 @@ export default async function Properties({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const query = await searchParams;
+  // Prevent user from sending unexpected params.
   const data = sanitizeCheckoutQuery(query);
   const { checkIn, checkOut } = getValidDates(
     data.rawCheckIn,
@@ -55,7 +57,7 @@ export default async function Properties({
     stayOptionsBookingData.adults,
     stayOptionsBookingData.kids,
   );
-
+  // Prevent user from tempering the URL, like using params which don't exist
   if (`/stays?${new URLSearchParams(query).toString()}` !== cannonicalUrl) {
     redirect(cannonicalUrl);
   }
@@ -65,10 +67,11 @@ export default async function Properties({
       <div className="max-w-7xl mx-auto px-4">
         <SectionHeader
           subHeading="Munnar, kerala"
-          heading="Our Properties"
-          description="Each retreat is a sanctuary designed to harmonize with its natural
-          surroundings."
+          heading="Choose Your Stay"
+          description="Select from our curated properties. Once you choose a stay, you’ll be able to explore available room options."
         />
+        <StepCounter step={1} label="Select a property" />
+
         <BookingStrip defaultCheckIn={checkIn} defaultCheckOut={checkOut} />
         <Suspense key="/stays" fallback={<GreenMistLoaderMini />}>
           <PropertyGrid data={stayOptionsBookingData} />

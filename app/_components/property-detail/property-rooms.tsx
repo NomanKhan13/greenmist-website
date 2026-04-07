@@ -2,6 +2,7 @@ import RoomsList from "./rooms-list";
 import { BookingStrip } from "../booking-strip/booking-strip";
 import { Suspense } from "react";
 import GreenMistLoaderMini from "../greenmist-loader-mini";
+import StepCounter from "../step-counter";
 
 export default async function PropertyRooms({
   propertySlug,
@@ -29,6 +30,7 @@ export default async function PropertyRooms({
           Choose Your Sanctuaries
         </h2>
       </div>
+      <StepCounter step={2} label="Select the room type" />
       <div className="mb-10">
         <BookingStrip
           defaultCheckIn={initialCheckIn}

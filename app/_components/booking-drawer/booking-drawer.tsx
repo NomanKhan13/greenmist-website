@@ -208,12 +208,12 @@ export default function BookingSheet({
                             </h4>
                             <div className="text-right">
                               <span className="text-sm font-medium text-foreground">
-                                ₹{addon.price}
+                                ₹{addon.price}{" "}
                               </span>
                               {addon.isDailyPricing && (
-                                <p className="text-[10px] text-muted-foreground">
-                                  / night
-                                </p>
+                                <span className="text-[10px] text-muted-foreground">
+                                  /night
+                                </span>
                               )}
                             </div>
                           </div>

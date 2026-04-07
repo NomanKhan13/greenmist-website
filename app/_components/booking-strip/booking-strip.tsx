@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Search,
   Calendar01Icon,
+  Loading02Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useSearchParams } from "next/navigation";
@@ -32,6 +33,7 @@ export function BookingStrip({
   const searchParams = useSearchParams();
   const [openFrom, setOpenFrom] = useState(false);
   const [openTo, setOpenTo] = useState(false);
+  const [isSearchUpdated, setIsSearchUpdated] = useState(false);
 
   const defaultGuests = {
     adults: Number(searchParams.get("adults")) || 2,
@@ -59,6 +61,13 @@ export function BookingStrip({
     !isValid(new Date(dateFrom)) ||
     !isValid(new Date(dateTo)) ||
     guestCount?.adults <= 0;
+
+  function handleIsSearchUpdated() {
+    setIsSearchUpdated(true);
+    setTimeout(() => {
+      setIsSearchUpdated(false);
+    }, 1000);
+  }
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -192,17 +201,29 @@ export function BookingStrip({
             className="w-full lg:w-48 h-full p-4 lg:py-0 rounded-lg text-base font-semibold gap-2 cursor-pointer disabled:brightness-50"
             size="lg"
             disabled={isSearchButtonDisabled}
-            onClick={() =>
-              handleAvailabilitySearch(dateFrom, dateTo, guestCount)
-            }
+            onClick={() => {
+              handleIsSearchUpdated();
+              handleAvailabilitySearch(dateFrom, dateTo, guestCount);
+            }}
           >
-            <HugeiconsIcon
-              icon={Search}
-              size={20}
-              color="currentColor"
-              strokeWidth={2}
-            />
-            Update Search
+            {isSearchUpdated ? (
+              <HugeiconsIcon
+                icon={Loading02Icon}
+                size={20}
+                color="currentColor"
+                strokeWidth={2}
+                className="animate-spin"
+              />
+            ) : (
+              <HugeiconsIcon
+                icon={Search}
+                size={20}
+                color="currentColor"
+                strokeWidth={2}
+              />
+            )}
+
+            {isSearchUpdated ? "Updating..." : "Update Search"}
           </Button>
         </div>
       </div>

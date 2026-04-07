@@ -22,6 +22,7 @@ import React, { useReducer } from "react";
 import { createBookingAction } from "../../_lib/booking-actions";
 import { RoomDetails } from "../property-detail/rooms-list";
 import { BookingDataProps } from "@/app/checkout/page";
+import { formatCurrency } from "@/app/booking-success/[reference]/page";
 
 // ================= CONSTANTS =================
 const TAXES_RATE = 0.18;
@@ -327,7 +328,7 @@ export function CheckoutSummaryCard({
 
         <Link
           href={`/stays/${roomData?.property_slug}?checkIn=${format(bookingData.checkIn, "yyyy-MM-dd")}&checkOut=${format(bookingData.checkOut, "yyyy-MM-dd")}&room=${bookingData.room}`}
-          className="text-sm p-2 block text-right text-primary hover:underline"
+          className="text-xs sm:text-sm p-2 block text-right text-primary hover:underline"
         >
           Edit Dates & Guests
         </Link>
@@ -342,7 +343,7 @@ export function CheckoutSummaryCard({
                   {formattedCheckIn} - {formattedCheckOut}
                 </span>
                 <span className="text-[10px] text-muted-foreground font-normal">
-                  ({nights} Nights)
+                  ({nights} {nights > 1 ? "Nights" : "Night"})
                 </span>
               </span>
             }
@@ -378,13 +379,13 @@ export function CheckoutSummaryCard({
           <div className="space-y-3 text-sm">
             {/* Room Cost */}
             <PriceRow
-              label={`₹${Number(roomData.price).toLocaleString()} per night x ${nights} nights x ${bookingData.roomCount} rooms`}
-              value={roomTotal}
+              label={`₹${Number(roomData.price).toLocaleString()} x ${nights} ${nights > 1 ? "nights" : "night"}`}
+              value={formatCurrency(roomTotal)}
             />
 
             {/* Add-ons List */}
             {bookingData.selectedAddons.length > 0 && (
-              <div className="py-2 flex flex-col">
+              <div className="-mt-1 flex flex-col">
                 {bookingData.selectedAddons.map((addon) => (
                   <div
                     key={addon.slug}
@@ -407,7 +408,10 @@ export function CheckoutSummaryCard({
             )}
 
             {/* Taxes */}
-            <PriceRow label="Taxes & Fees (18%)" value={taxes} />
+            <PriceRow
+              label="Taxes & Fees (18%)"
+              value={formatCurrency(taxes)}
+            />
             <Separator className="bg-border my-2" />
             {/* Total */}
             <div className="flex justify-between items-end pt-2">
@@ -450,7 +454,7 @@ export function CheckoutSummaryCard({
   );
 }
 
-const SummaryRow = ({
+export const SummaryRow = ({
   icon,
   label,
   value,
@@ -475,14 +479,14 @@ const SummaryRow = ({
   </div>
 );
 
-const PriceRow = ({
+export const PriceRow = ({
   label,
   value,
   isPlus = false,
   subtext,
 }: {
   label: string;
-  value: number;
+  value: string;
   isPlus?: boolean;
   subtext?: string;
 }) => (
@@ -494,7 +498,7 @@ const PriceRow = ({
       {subtext && <span className="text-[10px] opacity-70">{subtext}</span>}
     </div>
     <span>
-      {isPlus ? "+" : ""} ₹{value.toLocaleString()}
+      {isPlus ? "+" : ""} {value.toLocaleString()}
     </span>
   </div>
 );

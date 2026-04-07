@@ -29,7 +29,7 @@ export default function PropertyHero({
           className="object-cover object-right lg:object-center"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/90" />
+        <div className="absolute inset-0 z-0 bg-linear-to-b from-black/60 from-0% via-black/20 via-60% to-background to-100%" />
       </div>
 
       <div className="absolute top-8 left-8 md:top-24 md:left-24 z-20">
