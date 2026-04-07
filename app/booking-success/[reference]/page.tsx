@@ -9,6 +9,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { format, differenceInDays } from "date-fns";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 type BookingSuccessProps = {
   params: Promise<{
@@ -24,6 +25,7 @@ export const formatCurrency = (amount: number) =>
   }).format(amount);
 
 const SUPABASE_BASE_IMG_URL = process.env.NEXT_PUBLIC_SUPABASE_BASE_IMG_URL;
+
 export default async function BookingSuccess({ params }: BookingSuccessProps) {
   const { reference } = await params;
   const bookingData = await bookingExist(reference);
@@ -39,7 +41,10 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
 
   const formattedCheckIn = format(checkInDate, "MMM dd");
   const formattedCheckOut = format(checkOutDate, "MMM dd, yyyy");
-  console.log("I have a nights param?", bookingData.numNights);
+
+  if (!bookingData) {
+    notFound();
+  }
 
   return (
     <div className="min-h-screen relative flex items-center justify-center px-6 pt-24 pb-12 bg-background">
