@@ -287,7 +287,7 @@ export function CheckoutSummaryCard({
     observations: userDetails.observations,
     numAdults: bookingData.adults,
     roomsCount: bookingData.roomCount,
-    basePriceAtBooking: roomData.price,
+    basePriceAtBooking: roomTotal,
     addOnsAtBooking: addonsTotal,
     totalPriceAtBooking: grandTotal,
     room_type_id: roomData.room_type_id,
@@ -393,14 +393,11 @@ export function CheckoutSummaryCard({
                   >
                     <span className="text-primary">+ {addon.name}</span>
                     <span>
-                      ₹
                       {addon.isDailyPricing
-                        ? (
-                            addon.price *
-                            nights *
-                            bookingData.roomCount
-                          ).toLocaleString()
-                        : addon.price.toLocaleString()}
+                        ? formatCurrency(
+                            addon.price * nights * bookingData.roomCount,
+                          )
+                        : formatCurrency(addon.price)}
                     </span>
                   </div>
                 ))}
@@ -420,7 +417,7 @@ export function CheckoutSummaryCard({
               </span>
               <div className="text-right">
                 <span className="text-2xl font-serif text-foreground block leading-none">
-                  ₹{grandTotal.toLocaleString()}
+                  {formatCurrency(grandTotal)}
                 </span>
                 <span className="text-[10px] text-muted-foreground">
                   Includes all taxes

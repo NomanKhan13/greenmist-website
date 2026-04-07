@@ -39,7 +39,7 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
 
   const formattedCheckIn = format(checkInDate, "MMM dd");
   const formattedCheckOut = format(checkOutDate, "MMM dd, yyyy");
-  const numNights = differenceInDays(checkOutDate, checkInDate) || 1;
+  console.log("I have a nights param?", bookingData.numNights);
 
   return (
     <div className="min-h-screen relative flex items-center justify-center px-6 pt-24 pb-12 bg-background">
@@ -97,7 +97,8 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
                     {formattedCheckIn} - {formattedCheckOut}
                   </span>
                   <span className="text-[10px] text-muted-foreground font-normal">
-                    ({numNights} {numNights > 1 ? "Nights" : "Night"})
+                    ({bookingData.numNights}{" "}
+                    {bookingData.numNights > 1 ? "Nights" : "Night"})
                   </span>
                 </span>
               }
@@ -131,8 +132,8 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
             </h3>
             <div className="space-y-2 text-sm">
               <PriceRow
-                label={`${formatCurrency(bookingData.basePriceAtBooking)} x ${numNights} ${numNights > 1 ? "nights" : "night"}`}
-                value={formatCurrency(bookingData.roomType.pricePerNight)}
+                label={`${formatCurrency(bookingData.basePriceAtBooking)} x ${bookingData.numNights} ${bookingData.numNights > 1 ? "nights" : "night"}`}
+                value={formatCurrency(bookingData.basePriceAtBooking)}
               />
 
               <div className="-mt-1 flex justify-between text-primary text-xs">

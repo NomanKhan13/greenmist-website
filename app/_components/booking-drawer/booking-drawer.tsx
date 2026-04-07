@@ -25,6 +25,7 @@ import { RoomDetails } from "../property-detail/rooms-list";
 import useDrawerInfo from "./use-drawer-info";
 import { useSearchParams } from "next/navigation";
 import { distributeGuestsInRooms } from "@/app/checkout/page";
+import { formatCurrency } from "@/app/booking-success/[reference]/page";
 
 // ================= TYPES =================
 export type AddOnProps = {
@@ -235,14 +236,14 @@ export default function BookingSheet({
               </h3>
               <div className="space-y-3 text-sm">
                 <PriceRow
-                  label={`₹${Number(roomDetails.price).toLocaleString()} x ${roomsRequired} ${roomsRequired > 1 ? "rooms" : "room"} x ${nights} nights`}
-                  value={roomTotal}
+                  label={`${formatCurrency(roomDetails.price)} x ${nights} ${nights > 1 ? "nights" : "night"}`}
+                  value={formatCurrency(roomTotal)}
                 />
 
                 {addonsTotal > 0 && (
                   <PriceRow
                     label="Selected Add-ons"
-                    value={addonsTotal}
+                    value={formatCurrency(addonsTotal)}
                     isPlus
                     subtext={
                       selectedAddons.length > 0
@@ -252,7 +253,10 @@ export default function BookingSheet({
                   />
                 )}
 
-                <PriceRow label="Taxes & Fees (18%)" value={taxes} />
+                <PriceRow
+                  label="Taxes & Fees (18%)"
+                  value={formatCurrency(taxes)}
+                />
 
                 <Separator className="bg-border my-2" />
 
@@ -262,7 +266,7 @@ export default function BookingSheet({
                   </span>
                   <div className="text-right">
                     <span className="text-2xl font-serif text-foreground block leading-none">
-                      ₹{grandTotal.toLocaleString()}
+                      {formatCurrency(grandTotal)}
                     </span>
                     <span className="text-[10px] text-muted-foreground">
                       Includes all taxes
@@ -275,16 +279,16 @@ export default function BookingSheet({
         </ScrollArea>
 
         {/* FOOTER */}
-        <SheetFooter className="p-3 sm:p-6 border-t border-border bg-background sm:justify-center z-10">
+        <SheetFooter className="py-4 px-2 border-t border-border bg-background sm:justify-center z-10">
           <div className="w-full space-y-3">
             <Button
-              className="w-full py-7 rounded-lg flex items-center justify-between px-3 sm:px-6 shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-7 rounded-lg flex items-center justify-between shadow-lg hover:shadow-xl transition-all"
               size="lg"
               onClick={handleProceedToCheckout}
             >
               <span className="font-medium">Proceed to Checkout</span>
-              <div className="flex items-center gap-2 pl-4 border-l border-primary-foreground/20">
-                <span>₹{grandTotal.toLocaleString()}</span>
+              <div className="flex items-center gap-2 pl-2 border-l border-primary-foreground/20">
+                <span>{formatCurrency(grandTotal)}</span>
                 <HugeiconsIcon
                   icon={ArrowRight01Icon}
                   size={18}
@@ -336,7 +340,7 @@ const PriceRow = ({
   subtext,
 }: {
   label: string;
-  value: number;
+  value: string;
   isPlus?: boolean;
   subtext?: string;
 }) => (
@@ -348,7 +352,7 @@ const PriceRow = ({
       {subtext && <span className="text-[10px] opacity-70">{subtext}</span>}
     </div>
     <span>
-      {isPlus ? "+" : ""} ₹{value.toLocaleString()}
+      {isPlus ? "+" : ""} {value}
     </span>
   </div>
 );

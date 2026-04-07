@@ -28,7 +28,7 @@ export default function RoomCard({
         `relative flex flex-col overflow-hidden rounded-3xl border transition-all duration-300 group mb-20`,
         isEven ? "lg:flex-row" : "lg:flex-row-reverse",
         isRoomSelected
-          ? "border-primary/30 bg-linear-to-br from-primary/15 via-primary/5 to-transparent shadow-sm"
+          ? "border-primary/30 bg-linear-to-r sm:bg-linear-to-br from-primary/15 via-primary/5 to-transparent shadow-sm"
           : "border-border/40 bg-secondary dark:bg-card/40 hover:border-border/80",
       )}
     >
