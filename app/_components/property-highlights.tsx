@@ -22,10 +22,8 @@ export default async function PropertyHighlights() {
     <section className="py-24 md:py-32 bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <LandingSectionHeader
-          title="Our Sanctuaries."
-          description=" Each retreat is uniquely designed to harmonize with its natural
-            surroundings. Discover the perfect elevation for your escape to
-            Munnar."
+          title="Our Three Unique Stays."
+          description="Each retreat is uniquely designed to blend seamlessly with nature. Discover your perfect high-altitude escape to Munnar."
         />
 
         {/* Note - Used article tag for better semantic HTML */}

@@ -67,8 +67,8 @@ export default async function Properties({
       <div className="max-w-7xl mx-auto px-4">
         <SectionHeader
           subHeading="Munnar, kerala"
-          heading="Choose Your Stay"
-          description="Select from our curated properties. Once you choose a stay, you’ll be able to explore available room options."
+          heading="Pick Your Perfect Escape"
+          description="Choose from our handpicked retreats. Once you pick your stay, you'll be able to explore available room options."
         />
         <StepCounter step={1} label="Select a property" />
 

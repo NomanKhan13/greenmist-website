@@ -29,29 +29,27 @@ export function MobileMenu() {
             </Link>
           </SheetClose>
           <SheetClose asChild>
-            <Link className="py-2" href="/about">
-              About
+            <Link className="py-2" href="/estate">
+              The Estate
             </Link>
           </SheetClose>
           <SheetClose asChild>
-            <Link className="py-2" href="/Experience">
-              Experience
+            <Link className="py-2" href="/experiences">
+              Experiences
             </Link>
           </SheetClose>
           <SheetClose asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-2 flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-secondary-foreground/75 dark:text-muted-foreground hover:text-foreground hover:bg-transparent px-2 cursor-pointer"
-            >
-              <HugeiconsIcon
-                icon={User02Icon}
-                size={16}
-                color="currentColor"
-                strokeWidth={1.5}
-                className="group-hover:translate-x-1 transition"
-              />
-              <span>Account</span>
+            <Button variant="outline" asChild>
+              <Link href="/account">
+                <HugeiconsIcon
+                  icon={User02Icon}
+                  size={16}
+                  color="currentColor"
+                  strokeWidth={1.5}
+                  className="group-hover:translate-x-1 transition"
+                />
+                <span>Account</span>
+              </Link>
             </Button>
           </SheetClose>
         </div>

@@ -7,7 +7,7 @@ import {
   UserGroupIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { format, differenceInDays } from "date-fns";
+import { format } from "date-fns";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -92,7 +92,7 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
           </div>
 
           {/* Booking Details Box */}
-          <div className="border border-border/50 bg-muted/30 rounded-xl p-5 space-y-4 mb-8">
+          <div className="border border-border/40 bg-secondary dark:bg-card/40 hover:border-border/80 rounded-xl p-5 space-y-4 mb-8">
             <SummaryRow
               icon={Calendar01Icon}
               label="Dates"

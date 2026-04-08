@@ -27,7 +27,7 @@ export default async function PropertyRooms({
           The Collection
         </span>
         <h2 className="text-3xl md:text-5xl font-serif text-foreground">
-          Choose Your Sanctuaries
+          Pick Your Perfect Stay
         </h2>
       </div>
       <StepCounter step={2} label="Select the room type" />

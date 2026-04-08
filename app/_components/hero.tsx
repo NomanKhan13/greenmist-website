@@ -30,11 +30,11 @@ export default function Hero() {
 
         <div className="text-center space-y-6 mb-12 max-w-3xl">
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium leading-tighter tracking-wide text-stone-50 drop-shadow-sm text-balance">
-            Experience the Untouched Luxury of Munnar.
+            Discover the Pure, Natural Luxury of Munnar.
           </h1>
 
           <p className="text-lg sm:text-xl leading-relaxed text-stone-50/90 font-light">
-            Discover serenity across three exclusive properties nestled in the
+            Find peace and calm at our three unique retreats nestled in the
             misty hills. Where luxury meets nature.
           </p>
         </div>

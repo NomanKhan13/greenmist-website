@@ -494,7 +494,7 @@ export const PriceRow = ({
       <span>{label}</span>
       {subtext && <span className="text-[10px] opacity-70">{subtext}</span>}
     </div>
-    <span>
+    <span className="text-foreground font-medium">
       {isPlus ? "+" : ""} {value.toLocaleString()}
     </span>
   </div>

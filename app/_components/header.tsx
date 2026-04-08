@@ -37,16 +37,19 @@ export default function Header() {
           <Button
             variant="outline"
             size="sm"
-            className="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-secondary-foreground/75 dark:text-muted-foreground hover:text-foreground hover:bg-transparent px-2 cursor-pointer"
+            className="hidden sm:flex cursor-pointer"
+            asChild
           >
-            <HugeiconsIcon
-              icon={User02Icon}
-              size={16}
-              color="currentColor"
-              strokeWidth={1.5}
-              className="group-hover:translate-x-1 transition"
-            />
-            <span>Account</span>
+            <Link href="/account">
+              <HugeiconsIcon
+                icon={User02Icon}
+                size={16}
+                color="currentColor"
+                strokeWidth={1.5}
+                className="group-hover:translate-x-1 transition"
+              />
+              <span>Account</span>
+            </Link>
           </Button>
 
           {/* Mobile Menu Trigger would go here */}

@@ -1,11 +1,16 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
+import { updateSession } from "./app/_lib/supabase-middleware";
 
-// This function can be marked `async` if using `await` inside
-export function proxy(request: NextRequest) {
-  return NextResponse.redirect(new URL("/", request.url));
+export async function proxy(request: NextRequest) {
+  return await updateSession(request);
 }
 
 export const config = {
-  matcher: "/abut/:path*",
+  matcher: [
+    /*
+     * Match all request paths except static files, images, etc.
+     * This allows Supabase to passively refresh tokens everywhere.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

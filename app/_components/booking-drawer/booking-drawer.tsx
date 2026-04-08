@@ -119,7 +119,7 @@ export default function BookingSheet({
         <ScrollArea className="flex-1 h-96">
           <div className="space-y-8 p-4 sm:p-6">
             {/* 1. Trip Summary Card */}
-            <div className="bg-muted/30 rounded-xl p-2.5 sm:p-5 border border-border/50 space-y-4">
+            <div className="border-border/40 bg-secondary dark:bg-card/40 hover:border-border/80 rounded-xl p-2.5 sm:p-5 border space-y-4">
               <SummaryRow
                 icon={Calendar03Icon}
                 label="Dates"
@@ -175,7 +175,7 @@ export default function BookingSheet({
                           ${
                             isSelected
                               ? "bg-primary/5 border-primary shadow-[0_0_15px_rgba(var(--primary),0.1)]"
-                              : "bg-background border-border hover:border-primary/30"
+                              : "bg-background/75 border-border hover:border-primary/30"
                           }
                         `}
                       >
@@ -351,7 +351,7 @@ const PriceRow = ({
       <span>{label}</span>
       {subtext && <span className="text-[10px] opacity-70">{subtext}</span>}
     </div>
-    <span>
+    <span className="text-foreground font-medium">
       {isPlus ? "+" : ""} {value}
     </span>
   </div>

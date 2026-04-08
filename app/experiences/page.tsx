@@ -8,27 +8,27 @@ export default function Experiences() {
   const experiences = [
     {
       id: 1,
-      title: "Footsteps in the Foliage",
+      title: "Forest Trails Trail",
       description:
-        "Wake up to fresh mountain air and walk alongside our local guides through generations-old tea plantations. Learn the craft of tea plucking and end your morning with a freshly brewed cup as the mist clears over the valley.",
+        "Wake up to fresh mountain air and walk alongside our local guides through generations-old tea plantations. Learn the craft of tea plucking and end your morning with a fresh-brewed cup of tea as the mist lifts over the valley.",
       tags: ["Guided Tour", "Nature Photography", "Heritage"],
       image: teaWalk,
       reverse: false,
     },
     {
       id: 2,
-      title: "Dining Under the Canopy",
+      title: "Outdoor Dining Experience or Dine in Nature",
       description:
-        "An intimate culinary journey set against the backdrop of the Western Ghats. Enjoy a customized menu of Kerala’s finest flavors, served in total privacy as the sun dips below the hills.",
+        "A unique dining experience set against the backdrop of the Western Ghats. Enjoy a customized menu of Kerala’s finest breathtaking flavors, served in total privacy as the sun sets over the hills.",
       tags: ["Culinary", "Couples", "Absolute Seclusion"],
       image: privateDining,
       reverse: true,
     },
     {
       id: 3,
-      title: "Beyond the Retreat",
+      title: "Adventure Beyond Munnar",
       description:
-        "For those who seek elevation and perspective. Traverse untouched trails, discover hidden waterfalls, and experience the raw, unfiltered wilderness of Munnar's deeper valleys.",
+        "For those who seek elevation and perspective. Hike on untouched trails, discover hidden waterfalls, and experience the raw beauty of Munnar's deeper valleys.",
       tags: ["Adventure", "Deep Silence", "Lush Greenery"],
       image: valleyTrek,
       reverse: false,
@@ -47,7 +47,7 @@ export default function Experiences() {
             Curated Moments
           </p>
           <h1 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight">
-            The Rhythm of Munnar.
+            The Magic of Munnar.
           </h1>
           <p className="text-muted-foreground max-w-lg mx-auto text-lg md:text-xl font-light">
             Discover experiences crafted to reconnect you with nature, culture,
@@ -98,16 +98,16 @@ export default function Experiences() {
       </section>
 
       {/* CTA Footer */}
-      <section className="border-t border-border py-24 text-center px-6">
+      <section className="bg-card border-t border-border py-24 text-center px-6">
         <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-8">
-          Ready to escape?
+          Ready for retreat?
         </h2>
         <Link
           href="/stays"
           className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded font-medium transition-colors duration-200 tracking-wide"
         >
           {" "}
-          Reserve Your Sanctuary
+          Explore Our Retreats
         </Link>
       </section>
     </div>

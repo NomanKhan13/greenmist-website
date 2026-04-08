@@ -6,7 +6,7 @@ import Link from "next/link";
 // Keeps your JSX clean and makes adding future pages effortless.
 const FOOTER_LINKS = [
   {
-    title: "Explore",
+    title: "THINGS TO DO",
     links: [
       { name: "Our Stays", href: "/stays" },
       { name: "The Estate", href: "/estate" },
@@ -35,8 +35,8 @@ export default function Footer() {
               GreenMist
             </span>
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              A sanctuary of luxury nestled in the misty hills of Munnar.
-              Experience nature without compromising on elegance.
+              Your luxury escape in the misty hills of Munnar. Experience nature
+              without compromising on elegance.
             </p>
           </div>
 

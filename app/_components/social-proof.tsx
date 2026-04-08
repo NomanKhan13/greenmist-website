@@ -11,7 +11,7 @@ const TESTIMONIALS = [
     author: "Arjun & Priya D.",
     location: "Mumbai",
     property: "Stayed at Tea Garden Retreat",
-    text: "The perfect escape from the city. Waking up to the mist rolling over the plantations is an image we'll never forget. The staff provided a level of unobtrusive, meticulous service that defines true luxury.",
+    text: "Planning a perfect group trip for five friends is tough, but GreenMist made it effortless. The common areas were perfect, and the rooms gave us all the privacy we needed. A truly seamless experience!",
   },
   {
     id: "t2",
@@ -34,7 +34,7 @@ export default function SocialProof() {
     <section className="py-24 md:py-32 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <LandingSectionHeader
-          title="Words from our Guests."
+          title="What Our Guests Say."
           description="Don't just take our word for it. Discover how travelers from
             around the world experienced the serenity of GreenMist."
         />

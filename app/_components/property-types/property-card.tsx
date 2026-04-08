@@ -37,7 +37,7 @@ export default function PropertyCard({
 
   return (
     <div
-      className={`relative flex flex-col overflow-hidden shadow-md rounded-2xl ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} items-stretch gap-0 mb-10 group/card`}
+      className={`relative flex flex-col overflow-hidden shadow rounded-2xl ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} items-stretch gap-0 mb-10 group/card`}
     >
       {!isAvailable && (
         <div
@@ -67,7 +67,7 @@ export default function PropertyCard({
         )}
       </div>
 
-      <div className="w-full lg:w-1/2 flex flex-col justify-center p-4 sm:p-6 lg:p-12 bg-secondary dark:bg-card/90">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center p-4 sm:p-6 lg:p-12 border-border/40 hover:border-border/80 bg-secondary dark:bg-card/90">
         <div className="mb-6">
           <h3 className="text-3xl lg:text-4xl font-serif text-foreground mb-3 group-hover/card:text-primary transition-colors duration-300">
             {property.name}
