@@ -56,9 +56,7 @@ export default async function MyReservations() {
 
               <div>
                 <h4 className="text-xl font-serif mb-1">
-                  {Array.isArray(res?.properties)
-                    ? res?.properties[0]?.name
-                    : (res?.properties as any)?.name}
+                  {(res?.properties as any)?.name}
                 </h4>
                 <p className="text-muted-foreground text-sm">
                   {format(new Date(res.check_in), "MMM do yyyy")} —{" "}
