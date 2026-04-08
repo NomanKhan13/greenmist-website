@@ -5,6 +5,22 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { format } from "date-fns";
 import Link from "next/link";
 
+// Drop this right below your imports
+type Reservation = {
+  id: string;
+  booking_code: string;
+  status: string; // e.g., 'UNCONFIRMED', 'CONFIRMED'
+  check_in: string;
+  check_out: string;
+  properties:
+    | {
+        name: string;
+      }
+    | { name: string }[]
+    | null;
+  // Note: We include the array option because Supabase sometimes infers joins as arrays depending on your foreign key setup!
+};
+
 export default async function MyReservations() {
   const supabase = await createClient();
   const {
@@ -13,11 +29,13 @@ export default async function MyReservations() {
 
   const email = user?.user_metadata?.email;
 
-  const { data: reservations, error } = await supabase
+  const { data } = await supabase
     .from("bookings")
-    // FIX 1: Removed !inner
     .select("status, check_in, check_out, id, booking_code, properties(name)")
     .eq("email", email);
+
+  // Cast the data so TypeScript knows exactly what it is
+  const reservations = data as Reservation[] | null;
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -55,8 +73,11 @@ export default async function MyReservations() {
               </p>
 
               <div>
+                {/* Replace the old h4 with this clean version */}
                 <h4 className="text-xl font-serif mb-1">
-                  {(res?.properties as any)?.name}
+                  {Array.isArray(res?.properties)
+                    ? res?.properties[0]?.name
+                    : res?.properties?.name || "Unknown Retreat"}
                 </h4>
                 <p className="text-muted-foreground text-sm">
                   {format(new Date(res.check_in), "MMM do yyyy")} —{" "}
