@@ -54,9 +54,9 @@ export default async function MyReservations() {
             {/* 2. MOVED THE LINK OUT, ADDED 'absolute top-6 right-6' */}
             <Link
               href={`/booking-success/${res.booking_code}`}
-              className="absolute top-6 right-6 group text-sm text-muted-foreground hover:text-foreground transition-colors flex gap-1 items-center"
+              className="absolute top-6 right-6 group text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors flex gap-1 items-center"
             >
-              <span className="hidden md:block">View Details</span>
+              <span className="">View Details</span>
               <HugeiconsIcon
                 icon={ArrowUpRight}
                 size={14}

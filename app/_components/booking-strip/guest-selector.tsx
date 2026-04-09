@@ -34,7 +34,7 @@ export function GuestSelector({
       <div className="flex flex-col gap-2">
         <Label
           htmlFor="guests"
-          className="text-xs uppercase tracking-wider text-muted-foreground font-medium flex items-center gap-2"
+          className="text-xs uppercase tracking-wider text-secondary-foreground/75 dark:text-muted-foreground font-medium flex items-center gap-2"
         >
           <HugeiconsIcon
             icon={UserGroupIcon}

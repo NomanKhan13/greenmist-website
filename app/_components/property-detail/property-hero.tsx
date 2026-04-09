@@ -29,12 +29,14 @@ export default function PropertyHero({
           className="object-cover object-right lg:object-center"
           priority
         />
-        <div className="absolute inset-0 z-0 bg-linear-to-b from-black/60 from-0% via-black/20 via-60% to-background to-100%" />
+        <div className="absolute inset-0 z-0 bg-black/30" />
+        <div className="absolute inset-x-0 top-0 h-48 z-0 bg-linear-to-b from-black/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 z-0 bg-linear-to-t from-[#0c0a09] to-transparent" />
       </div>
 
       <div className="absolute top-8 left-8 md:top-24 md:left-24 z-20">
         <Button variant="ghost" asChild>
-          <Link href="/stays" className="flex items-center gap-2">
+          <Link href="/stays" className="flex items-center gap-2 text-stone-50">
             <HugeiconsIcon icon={ArrowLeft02Icon} size={16} strokeWidth={2} />
             <span className="tracking-wide text-[0.65rem] md:text-xs uppercase font-medium">
               Back to Retreats

@@ -207,7 +207,7 @@ export default function BookingSheet({
                             >
                               {addon.name}
                             </h4>
-                            <div className="text-right">
+                            <div className="text-right flex flex-row items-end gap-1 sm:gap-0 sm:flex-col">
                               <span className="text-sm font-medium text-foreground">
                                 ₹{addon.price}{" "}
                               </span>

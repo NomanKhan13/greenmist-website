@@ -1,5 +1,6 @@
 import { PriceRow, SummaryRow } from "@/app/_components/checkout/checkout";
 import { bookingExist } from "@/app/_lib/data-service";
+import { Button } from "@/components/ui/button";
 import {
   Calendar01Icon,
   Download,
@@ -9,6 +10,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { format } from "date-fns";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type BookingSuccessProps = {
@@ -173,14 +175,16 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
 
           {/* Action Buttons */}
           <div className="flex flex-col gap-3">
-            <button className="w-full bg-primary text-primary-foreground py-4 rounded-lg hover:bg-primary/90 transition text-sm font-medium shadow-lg shadow-primary/20">
-              Manage Reservation
-            </button>
+            <Button className="rounded-lg py-6" asChild>
+              <Link href="/account/reservations">Manage Reservation</Link>
+            </Button>
 
-            <button className="w-full border border-border text-foreground/80 py-4 rounded-lg hover:bg-accent hover:text-accent-foreground transition text-sm font-medium flex items-center justify-center gap-2">
-              <HugeiconsIcon icon={Download} size={18} strokeWidth={1.5} />
-              Download Receipt
-            </button>
+            <Button className="rounded-lg py-6" variant="outline" asChild>
+              <Link href="#">
+                <HugeiconsIcon icon={Download} size={18} strokeWidth={1.5} />
+                <span>Download Receipt</span>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

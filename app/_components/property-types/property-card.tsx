@@ -103,7 +103,7 @@ export default function PropertyCard({
           <Button
             asChild
             disabled={!isAvailable}
-            className="group/cta bg-foreground text-background p-6 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            className="group/cta bg-foreground/85 text-background p-6 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
           >
             <Link href={href}>
               <span>

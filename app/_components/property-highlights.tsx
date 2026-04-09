@@ -4,6 +4,7 @@ import { getProperties } from "../_lib/data-service";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
 import LandingSectionHeader from "./landing-section-header";
+import { Button } from "@/components/ui/button";
 
 const SUPABASE_BASE_IMG_URL = process.env.NEXT_PUBLIC_SUPABASE_BASE_IMG_URL;
 
@@ -93,12 +94,13 @@ export default async function PropertyHighlights() {
         </div>
 
         <div className="flex justify-center border-t border-border pt-12">
-          <Link
-            href="/stays"
-            className="inline-flex h-12 items-center justify-center rounded-md bg-foreground px-8 text-sm font-medium text-background shadow-sm transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          <Button
+            variant="secondary"
+            className="rounded-lg py-6 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-background bg-foreground/85 shadow-sm transition-colors hover:bg-foreground/90"
+            asChild
           >
-            Compare All Retreats
-          </Link>
+            <Link href="/stays">Compare All Retreats</Link>
+          </Button>
         </div>
       </div>
     </section>

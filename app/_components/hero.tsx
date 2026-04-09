@@ -1,5 +1,5 @@
 import Image from "next/image";
-import heroImg from "@/public/hero-bg.jpg";
+import heroImg from "@/public/gm-hero-bg.jpg";
 import { getValidDates } from "../_utils/validation";
 import { BookingStrip } from "./booking-strip/booking-strip";
 
@@ -17,10 +17,10 @@ export default function Hero() {
         priority
         quality={90}
       />
+      <div className="absolute inset-0 z-0 bg-black/30" />
+      <div className="absolute inset-x-0 top-0 h-48 z-0 bg-linear-to-b from-black/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 z-0 bg-linear-to-t from-[#0c0a09] to-transparent" />
 
-      {/* Note - Add this kind of bg so that sudden vibe change from image to black bg doesnt happen */}
-      <div className="absolute inset-0 z-0 bg-linear-to-b from-black/60 from-0% via-black/20 via-60% to-background to-100%" />
-      {/* Note - Used hard coded colors and not globals.css bcz we want same colors on img on both dark and light modes */}
       <div className="relative z-10 flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-8 mt-32 lg:mt-16">
         <div className="mb-6 flex items-center space-x-2 text-stone-50/90 text-sm tracking-widest uppercase font-medium">
           <span className="h-px w-8 bg-stone-50/50"></span>
@@ -29,7 +29,7 @@ export default function Hero() {
         </div>
 
         <div className="text-center space-y-6 mb-12 max-w-3xl">
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium leading-tighter tracking-wide text-stone-50 drop-shadow-sm text-balance">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium leading-tighter tracking-wide text-stone-50 drop-shadow-lg text-balance">
             Discover the Pure, Natural Luxury of Munnar.
           </h1>
 

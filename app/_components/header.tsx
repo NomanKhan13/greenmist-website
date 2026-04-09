@@ -1,25 +1,50 @@
+"use client"; // Must be a client component for scroll state
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-// import Image from "next/image";
-// import logo from "@/public/greenmist.png";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Mountain, User02Icon } from "@hugeicons/core-free-icons";
 import { MobileMenu } from "./mobile-menu";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isTargetPathname =
+    pathname === "/" || pathname.startsWith("/stays/greenmist");
+
+  const makeBgTransparent = isTargetPathname && !isScrolled;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-md bg-background/25 border-b border-border/30 support-[backdrop-filter]:bg-background/25">
+    <header
+      className={clsx(
+        "fixed top-0 left-0 right-0 z-50 transition-all backdrop-blur-md border-b",
+        makeBgTransparent
+          ? "bg-transparent border-transparent text-white"
+          : "bg-background/50 border-border/60 text-foreground support-[backdrop-filter]:bg-background/50",
+      )}
+    >
       <div className="max-w-7xl w-full mx-auto px-6 h-16 flex justify-between items-center">
         <Link
           href="/"
-          className="group flex items-center gap-3 shrink-0 text-foreground opacity-90 hover:opacity-100 transition-all duration-300"
+          className="group flex items-center gap-3 shrink-0 opacity-90 hover:opacity-100 transition-all"
         >
           <HugeiconsIcon
             icon={Mountain}
             size={24}
             color="currentColor"
             strokeWidth={1.5}
-            className="text-primary transition-transform duration-500 ease-out group-hover:scale-110"
+            className={`transition-transform ease-out group-hover:scale-110 text-primary`}
           />
 
           <span className="font-serif text-2xl tracking-wide font-medium">
@@ -28,16 +53,26 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">
-          <NavLink href="/stays">Stays</NavLink>
-          <NavLink href="/estate">The Estate</NavLink>
-          <NavLink href="/experiences">Experiences</NavLink>
+          {/* Pass the scroll state down to the nav links so they know what color to be */}
+          <NavLink href="/stays" makeBgTransparent={makeBgTransparent}>
+            Stays
+          </NavLink>
+          <NavLink href="/estate" makeBgTransparent={makeBgTransparent}>
+            The Estate
+          </NavLink>
+          <NavLink href="/experiences" makeBgTransparent={makeBgTransparent}>
+            Experiences
+          </NavLink>
         </nav>
 
         <div className="flex items-center gap-4">
           <Button
-            variant="outline"
+            variant={makeBgTransparent ? "outline" : "secondary"} // Changes button style based on background
             size="sm"
-            className="hidden sm:flex cursor-pointer"
+            className={`hidden sm:flex cursor-pointer ${
+              !makeBgTransparent &&
+              "bg-white/10 hover:bg-white/20 text-white border-none"
+            }`}
             asChild
           >
             <Link href="/account">
@@ -52,7 +87,6 @@ export default function Header() {
             </Link>
           </Button>
 
-          {/* Mobile Menu Trigger would go here */}
           <div className="block md:hidden">
             <MobileMenu />
           </div>
@@ -62,21 +96,32 @@ export default function Header() {
   );
 }
 
-// Helper Component for consistent luxury links
 export function NavLink({
   href,
   children,
+  makeBgTransparent,
 }: {
   href: string;
   children: React.ReactNode;
+  makeBgTransparent: boolean;
 }) {
   return (
     <Link
       href={href}
-      className="text-xs uppercase tracking-widest font-medium text-secondary-foreground/75 dark:text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
+      className={clsx(
+        "text-xs uppercase tracking-widest font-medium transition-colors relative group",
+        makeBgTransparent
+          ? "text-white/80 hover:text-white"
+          : "text-secondary-foreground dark:text-muted-foreground hover:text-foreground",
+      )}
     >
       {children}
-      <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full opacity-50" />
+      <span
+        className={clsx(
+          `absolute -bottom-1 left-0 w-0 h-px transition-all group-hover:w-full opacity-50`,
+          makeBgTransparent ? "bg-white" : "bg-foreground",
+        )}
+      />
     </Link>
   );
 }

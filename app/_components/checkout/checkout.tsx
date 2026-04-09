@@ -128,7 +128,7 @@ export default function CheckoutPage({
             Return to Retreat
           </Link>
           <h1 className="text-4xl md:text-5xl font-serif mb-2 text-foreground">
-            Secure Your Sanctuary
+            Secure Your Stay
           </h1>
           <p className="text-muted-foreground">
             Complete your reservation details below.
@@ -180,7 +180,7 @@ function GuestForm({
             <input
               type="text"
               id="firstName"
-              className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+              className="w-full bg-muted/30 border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
               placeholder="John"
               value={userDetails.firstName}
               onChange={(e) =>
@@ -201,7 +201,7 @@ function GuestForm({
             <input
               type="text"
               id="lastName"
-              className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+              className="w-full bg-muted/30 border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
               placeholder="Doe"
               value={userDetails.lastName}
               onChange={(e) =>
@@ -223,7 +223,7 @@ function GuestForm({
           <input
             type="email"
             id="email"
-            className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+            className="w-full bg-muted/30 border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
             placeholder="johndoe123@email.com"
             value={userDetails.email}
             onChange={(e) =>
@@ -241,7 +241,7 @@ function GuestForm({
           <input
             type="text"
             id="observations"
-            className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+            className="w-full bg-muted/30 border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
             placeholder="Arrival time, dietary restrictions, special occasions..."
             value={userDetails.observations}
             onChange={(e) =>
@@ -300,7 +300,7 @@ export function CheckoutSummaryCard({
   return (
     <div className="sticky top-12">
       {/* Glass Card Effect using sematic variables */}
-      <div className="bg-card/40 backdrop-blur-xl border border-border p-4 sm:p-8 rounded-2xl shadow-2xl">
+      <div className="bg-card dark:bg-card/40 backdrop-blur-xl border border-border p-4 sm:p-8 rounded-2xl shadow-2xl">
         {/* Property Context */}
         <div className="flex gap-4 mb-4">
           <div className="w-20 h-20 bg-muted rounded-lg overflow-hidden relative">
@@ -461,7 +461,7 @@ export const SummaryRow = ({
   value: React.ReactNode;
 }) => (
   <div className="flex justify-between items-start">
-    <div className="flex items-center gap-2 text-muted-foreground shrink-0">
+    <div className="flex items-center gap-2 text-secondary-foreground/60 shrink-0">
       <HugeiconsIcon
         icon={icon}
         size={16}

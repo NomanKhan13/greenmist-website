@@ -30,7 +30,7 @@ export default async function AccountSettings() {
             <input
               type="text"
               id="fullName"
-              className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+              className="w-full bg-muted/30  border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
               placeholder="John"
               defaultValue={fullName}
             />
@@ -45,7 +45,7 @@ export default async function AccountSettings() {
             <input
               type="email"
               id="email"
-              className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+              className="w-full bg-muted/30  border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
               placeholder="John@gmail.com"
               defaultValue={email}
             />
@@ -71,7 +71,7 @@ export default async function AccountSettings() {
           <input
             type="text"
             id="current-password"
-            className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+            className="w-full bg-muted/30  border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
             placeholder="*******"
           />
         </div>
@@ -85,7 +85,7 @@ export default async function AccountSettings() {
           <input
             type="text"
             id="new-password"
-            className="w-full bg-muted/30 border border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
+            className="w-full bg-muted/30  border border-ring/40 dark:border-border rounded-sm p-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition placeholder:text-muted-foreground/50"
             placeholder="John@123"
           />
         </div>
