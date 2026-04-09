@@ -58,6 +58,8 @@ export type ReservationData = {
   status: string;
   isPaid: boolean;
   guestId: string | null;
+  email: string;
+  fullName: string;
 };
 
 // ================= REDUCER =================
@@ -294,6 +296,8 @@ export function CheckoutSummaryCard({
     check_in: bookingData.checkIn,
     check_out: bookingData.checkOut,
     property_id: roomData.property_id,
+    email: userDetails.email,
+    fullName: `${userDetails.firstName} ${userDetails.lastName}`,
   };
   const createBookingWithData = createBookingAction.bind(null, checkoutData);
 

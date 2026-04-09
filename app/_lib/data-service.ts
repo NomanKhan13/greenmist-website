@@ -127,6 +127,7 @@ export async function createBooking(bookingData: ReservationData) {
     .select()
     .single();
 
+  console.log(error);
   return { booking, error };
 }
 
