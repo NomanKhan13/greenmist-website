@@ -5,6 +5,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
 import LandingSectionHeader from "./landing-section-header";
 import { Button } from "@/components/ui/button";
+import clsx from "clsx";
 
 const SUPABASE_BASE_IMG_URL = process.env.NEXT_PUBLIC_SUPABASE_BASE_IMG_URL;
 
@@ -40,7 +41,12 @@ export default async function PropertyHighlights() {
                   alt={`View of ${stay.name}`}
                   fill
                   quality={75}
-                  className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                  className={clsx(
+                    "object-cover transition-transform duration-700 ease-in-out group-hover:scale-105",
+                    stay.thumbnail === "gm-hill-webp.webp"
+                      ? "object-right"
+                      : "object-left",
+                  )}
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>

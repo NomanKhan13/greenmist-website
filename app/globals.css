@@ -128,14 +128,8 @@
   }
 }
 
-.content-auto {
-  content-visibility: auto;
-}
-
-.content-auto {
-  content-visibility: hidden;
-}
-
-.contain-intrinsic-size-700 {
-  contain-intrinsic-size: 700px;
+@layer utilities {
+  .animate-in {
+    animation-fill-mode: both !important;
+  }
 }

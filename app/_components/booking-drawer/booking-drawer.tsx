@@ -7,6 +7,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetFooter,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -110,9 +111,7 @@ export default function BookingSheet({
           <SheetTitle className="text-2xl md:text-3xl font-serif text-foreground">
             Your Stay
           </SheetTitle>
-          <p className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest">
-            Confirm Details
-          </p>
+          <SheetDescription>Confirm Details</SheetDescription>
         </SheetHeader>
 
         {/* SCROLLABLE BODY */}

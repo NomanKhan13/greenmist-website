@@ -106,9 +106,7 @@ export default function PropertyCard({
             className="group/cta bg-foreground/85 text-background p-6 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
           >
             <Link href={href}>
-              <span>
-                {!isAvailable ? "Not Available" : "View Availability"}
-              </span>
+              <span>{!isAvailable ? "Not Available" : "View Rooms"}</span>
               <HugeiconsIcon
                 icon={ArrowUpRight}
                 size={16}

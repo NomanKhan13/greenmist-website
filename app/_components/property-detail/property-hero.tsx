@@ -34,7 +34,7 @@ export default function PropertyHero({
         <div className="absolute inset-x-0 bottom-0 h-1/3 z-0 bg-linear-to-t from-[#0c0a09] to-transparent" />
       </div>
 
-      <div className="absolute top-8 left-8 md:top-24 md:left-24 z-20">
+      {/* <div className="absolute top-8 left-8 md:top-24 md:left-24 z-20">
         <Button variant="ghost" asChild>
           <Link href="/stays" className="flex items-center gap-2 text-stone-50">
             <HugeiconsIcon icon={ArrowLeft02Icon} size={16} strokeWidth={2} />
@@ -43,7 +43,7 @@ export default function PropertyHero({
             </span>
           </Link>
         </Button>
-      </div>
+      </div> */}
 
       <div className="absolute bottom-0 left-0 w-full px-4 md:px-12 pb-12 md:pb-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8">

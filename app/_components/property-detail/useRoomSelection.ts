@@ -14,6 +14,7 @@ export default function useRoomSelection(
   function toggleRoomSelect() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("room", roomSlug);
+    if (!isRoomSelected) params.set("showBooking", "true");
     console.log(
       "TRY TO DESELECT",
       searchParams.get("room")?.toString() === roomSlug,

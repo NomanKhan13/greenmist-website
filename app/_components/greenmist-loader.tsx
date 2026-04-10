@@ -3,7 +3,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 
 function GreenMistLoader() {
   return (
-    <div className="bg-background flex items-center justify-center pt-32">
+    <div className="flex items-center justify-center pt-32">
       <div className="max-w-2xl mx-auto px-6 flex flex-col items-center justify-center gap-6">
         <HugeiconsIcon
           strokeWidth={1.5}

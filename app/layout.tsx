@@ -5,6 +5,7 @@ import Header from "./_components/header";
 import { ThemeProvider } from "next-themes";
 import { BookingProvider } from "./_components/booking-strip/booking-strip-context";
 import Footer from "./_components/footer";
+import Template from "./_components/template";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -36,7 +37,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <BookingProvider>
             <Header />
-            <main className="min-h-screen">{children}</main>
+            <main className="min-h-screen">
+              <Template>{children}</Template>
+            </main>
             <Footer />
           </BookingProvider>
         </ThemeProvider>
