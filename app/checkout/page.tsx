@@ -6,6 +6,7 @@ import { checkAvailabilityByProperty, getAddOns } from "../_lib/data-service";
 import { getValidDates } from "../_utils/validation";
 import { format } from "date-fns";
 import { AddOnProps } from "../_components/booking-drawer/booking-drawer";
+import { getUserData } from "../_lib/auth";
 
 // ================= TYPES =================
 
@@ -122,6 +123,8 @@ export default async function page({
     getAddOns(),
   ]);
 
+  const userData = await getUserData();
+
   if (!roomData?.length) {
     redirect("/");
   }
@@ -169,7 +172,11 @@ export default async function page({
 
   return (
     <div className="min-h-screen">
-      <CheckoutPage roomData={roomData[0]} bookingData={bookingData} />
+      <CheckoutPage
+        roomData={roomData[0]}
+        bookingData={bookingData}
+        userData={userData}
+      />
     </div>
   );
 }

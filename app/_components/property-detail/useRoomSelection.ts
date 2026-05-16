@@ -22,7 +22,8 @@ export default function useRoomSelection(
     if (searchParams.get("room")?.toString() === roomSlug) {
       params.delete("room");
     }
-
+    const newUrl = `${pathname}?${params.toString()}`;
+    // window.history.pushState(null, "", newUrl);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 

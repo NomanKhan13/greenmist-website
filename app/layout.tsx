@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { BookingProvider } from "./_components/booking-strip/booking-strip-context";
 import Footer from "./_components/footer";
 import Template from "./_components/template";
+import { Toaster } from "sonner";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
             <main className="min-h-screen">
               <Template>{children}</Template>
             </main>
+            <Toaster />
             <Footer />
           </BookingProvider>
         </ThemeProvider>

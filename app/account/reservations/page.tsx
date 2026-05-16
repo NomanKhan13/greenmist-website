@@ -1,22 +1,40 @@
+import ReservationsList from "@/app/_components/account/reservations-list";
+import { UpdateReservation } from "@/app/_components/account/update-reservation";
 import { createClient } from "@/app/_lib/supabase-server";
-import { Button } from "@/components/ui/button";
-import { ArrowUpRight } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { format } from "date-fns";
-import Link from "next/link";
 
 // Drop this right below your imports
-type Reservation = {
+export type ReservationProp = {
   id: string;
   booking_code: string;
   status: string; // e.g., 'UNCONFIRMED', 'CONFIRMED'
   check_in: string;
   check_out: string;
+  numAdults: number;
+  numKids: number;
+  roomsCount: number;
+  add_ons: { id: string; isDailyPricing: boolean; price: number }[];
   properties:
     | {
         name: string;
+        slug: string;
       }
-    | { name: string }[]
+    | { name: string; slug: string }[]
+    | null;
+  roomType:
+    | {
+        name: string;
+        pricePerNight: number;
+        id: string;
+        maxAdults: number;
+        maxKids: number;
+      }
+    | {
+        name: string;
+        pricePerNight: number;
+        id: string;
+        maxAdults: number;
+        maxKids: number;
+      }[]
     | null;
   // Note: We include the array option because Supabase sometimes infers joins as arrays depending on your foreign key setup!
 };
@@ -29,13 +47,37 @@ export default async function MyReservations() {
 
   const email = user?.user_metadata?.email;
 
-  const { data } = await supabase
-    .from("bookings")
-    .select("status, check_in, check_out, id, booking_code, properties(name)")
-    .eq("email", email);
+  async function getBookings() {
+    const { data, error } = await supabase
+      .from("bookings")
+      .select(
+        "status, check_in, check_out, id, numAdults, numKids, roomsCount, booking_code, add_ons, properties(name, slug), roomType(name, pricePerNight, id, maxAdults, maxKids)",
+      )
+      .eq("email", email);
+
+    if (error) {
+      console.log("ERROR FETCHING BOOKINGS", error);
+      return null;
+    }
+    return data;
+  }
+
+  async function getAddOns() {
+    const { data, error } = await supabase.from("addOns").select("*");
+    if (error) {
+      console.log("ERROR FETCHING ADD-ONS", error);
+      return null;
+    }
+    return data;
+  }
+
+  const [bookingsData, addOnsData] = await Promise.all([
+    await getBookings(),
+    await getAddOns(),
+  ]);
 
   // Cast the data so TypeScript knows exactly what it is
-  const reservations = data as Reservation[] | null;
+  const reservations = bookingsData as ReservationProp[] | null;
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -44,56 +86,11 @@ export default async function MyReservations() {
         Manage your retreats.
       </p>
 
-      <div className="flex flex-col gap-6">
-        {reservations?.map((res) => (
-          <div
-            key={res.id}
-            // 1. ADDED 'relative' to the main card container
-            className="relative border-border/40 bg-secondary dark:bg-card/60 hover:border-border/80 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 transition-colors"
-          >
-            {/* 2. MOVED THE LINK OUT, ADDED 'absolute top-6 right-6' */}
-            <Link
-              href={`/booking-success/${res.booking_code}`}
-              className="absolute top-6 right-6 group text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors flex gap-1 items-center"
-            >
-              <span className="">View Details</span>
-              <HugeiconsIcon
-                icon={ArrowUpRight}
-                size={14}
-                color="currentColor"
-                strokeWidth={1.5}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"
-              />
-            </Link>
-
-            <div className="flex flex-col gap-2 w-full lg:w-auto flex-1">
-              {/* Status is now on its own, no longer fighting with the link */}
-              <p className="text-primary text-xs font-semibold tracking-wider uppercase mt-1 md:mt-0">
-                {res.status}
-              </p>
-
-              <div>
-                {/* Replace the old h4 with this clean version */}
-                <h4 className="text-xl font-serif mb-1">
-                  {Array.isArray(res?.properties)
-                    ? res?.properties[0]?.name
-                    : res?.properties?.name || "Unknown Retreat"}
-                </h4>
-                <p className="text-muted-foreground text-sm">
-                  {format(new Date(res.check_in), "MMM do yyyy")} —{" "}
-                  {format(new Date(res.check_out), "MMM do yyyy")}
-                </p>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex self-end gap-4 w-full md:w-auto mt-2 lg:mt-0">
-              <Button variant="outline">Update</Button>
-              <Button variant="destructive">Cancel</Button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <ReservationsList reservations={reservations || []} />
+      <UpdateReservation
+        reservations={reservations}
+        addOnsData={addOnsData || []}
+      />
     </div>
   );
 }

@@ -7,9 +7,9 @@ export default function page({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="max-w-7xl w-full mx-auto mt-32 flex flex-col sm:flex-row justify-center">
+    <section className="max-w-7xl w-full mx-auto mt-32 flex flex-col sm:flex-row justify-center px-4 sm:px-6">
       <ProfileSidebar />
-      <div className="px-6 sm:px-12 py-6">{children}</div>
+      <div className="px-2 sm:px-12 py-6 flex-1">{children}</div>
       <div className="block sm:hidden bg-destructive/10 text-destructive rounded-lg mx-4">
         <LogoutButton />
       </div>

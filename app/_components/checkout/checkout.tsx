@@ -95,11 +95,23 @@ function userReducer(
 export default function CheckoutPage({
   roomData,
   bookingData,
+  userData,
 }: {
   roomData: RoomDetails;
   bookingData: BookingDataProps;
+  userData: {
+    email: string | null | undefined;
+    full_name: string | null | undefined;
+  };
 }) {
-  const [userDetails, dispatch] = useReducer(userReducer, initialState);
+  const [userDetails, dispatch] = useReducer(userReducer, {
+    ...initialState,
+    email: userData.email || initialState.email,
+    firstName: userData.full_name?.split(" ")[0] || initialState.firstName,
+    lastName:
+      userData.full_name?.split(" ").slice(1).join(" ") ||
+      initialState.lastName,
+  });
 
   return (
     <div className="min-h-screen pt-16 font-sans selection:bg-primary selection:text-primary-foreground relative overflow-hidden bg-background text-foreground">

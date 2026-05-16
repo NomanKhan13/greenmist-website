@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { createPortal } from "react-dom";
 
 export function BookingBar({ name, price }: { name: string; price: number }) {
   const searchParams = useSearchParams();
@@ -12,8 +13,8 @@ export function BookingBar({ name, price }: { name: string; price: number }) {
   const proceedParams = new URLSearchParams(searchParams.toString());
   proceedParams.set("showBooking", "true");
 
-  return (
-    <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-md border-t border-border/50 px-4 py-2 sm:py-4 shadow-2xl z-40 animate-slide-up">
+  const barContent = (
+    <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-md border-t border-border/50 px-4 py-2 sm:py-4 shadow-2xl z-40">
       <div className="container mx-auto flex justify-between sm:justify-end gap-8 items-end sm:items-center">
         <div className="flex flex-col sm:flex-row gap-4">
           <p className="font-bold">{name}</p>
@@ -38,4 +39,6 @@ export function BookingBar({ name, price }: { name: string; price: number }) {
       </div>
     </div>
   );
+
+  return createPortal(barContent, document.body);
 }

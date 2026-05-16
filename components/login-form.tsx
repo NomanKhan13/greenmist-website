@@ -18,11 +18,14 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { handleLogin } from "@/app/_lib/auth";
 import { useActionState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const searchParams = useSearchParams();
+  const message = searchParams.get("message") || null;
   const [state, formAction, isPending] = useActionState(handleLogin, null);
   return (
     <div className={cn("relative flex flex-col gap-6", className)} {...props}>
@@ -93,6 +96,11 @@ export function LoginForm({
                 <p className="text-sm font-medium text-destructive">
                   {state.error}
                 </p>
+              </div>
+            )}
+            {!state?.error && message && (
+              <div className="mt-8 py-4 px-1.5 border border-border rounded-md text-center">
+                <p className="text-sm font-medium text-foreground">{message}</p>
               </div>
             )}
           </form>

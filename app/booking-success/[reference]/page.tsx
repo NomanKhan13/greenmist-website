@@ -151,7 +151,11 @@ export default async function BookingSuccess({ params }: BookingSuccessProps) {
               <div className="flex justify-between text-muted-foreground pt-1">
                 <span>Taxes & Fees (18%)</span>
                 <span className="text-foreground">
-                  {formatCurrency(bookingData.basePriceAtBooking * 0.18)}
+                  {formatCurrency(
+                    (bookingData.basePriceAtBooking +
+                      bookingData.addOnsAtBooking) *
+                      0.18,
+                  )}
                 </span>
               </div>
             </div>

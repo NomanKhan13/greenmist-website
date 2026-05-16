@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 type GuestSelectorProps = {
   guestCount: GuestCountProp;
@@ -26,10 +28,17 @@ export function GuestSelector({
   updateGuestCount,
 }: GuestSelectorProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isAccountsPage = pathname.startsWith("/account");
+  console.log(guestCount);
   return (
     <div
-      className="flex-1 p-5 lg:p-6 border-b lg:border-b-0 lg:border-r border-border/50 dark:border-border
-    "
+      className={cn(
+        "flex-1",
+        isAccountsPage
+          ? "bg-card/50 rounded-lg border p-3 border-border/40"
+          : "border-b lg:border-b-0 lg:border-r p-5 lg:p-6 border-border",
+      )}
     >
       <div className="flex flex-col gap-2">
         <Label

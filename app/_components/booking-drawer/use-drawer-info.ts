@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { getValidDates } from "../../_utils/validation";
 import { differenceInDays, format } from "date-fns";
@@ -18,6 +18,7 @@ export default function useDrawerInfo(
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
 
   // --- 1. Date & Guest Logic ---
   const { checkIn, checkOut } = getValidDates(
@@ -38,6 +39,8 @@ export default function useDrawerInfo(
     if (!open) {
       const newParams = new URLSearchParams(searchParams.toString());
       newParams.delete("showBooking");
+      const newUrl = `${pathname}?${newParams.toString()}`;
+      // window.history.replaceState(null, "", newUrl);
       router.replace(`?${newParams.toString()}`, { scroll: false });
     }
   }
