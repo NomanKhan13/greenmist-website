@@ -55,7 +55,8 @@ export default function useDrawerInfo(
 
   // --- 3. Financial Calculations (Memoized for performance) ---
   const { roomTotal, addonsTotal, taxes, grandTotal } = useMemo(() => {
-    const rTotal = Number(roomDetails?.price || 0) * nights * roomsRequired;
+    const rTotal =
+      Number(roomDetails?.price_per_night || 0) * nights * roomsRequired;
 
     // UX FIX: Calculate daily pricing correctly
     const aTotal = addOns
@@ -76,7 +77,13 @@ export default function useDrawerInfo(
       taxes: taxAmount,
       grandTotal: gTotal,
     };
-  }, [roomDetails?.price, nights, addOns, selectedAddons, roomsRequired]);
+  }, [
+    roomDetails?.price_per_night,
+    nights,
+    addOns,
+    selectedAddons,
+    roomsRequired,
+  ]);
 
   // --- 4. Navigation Logic ---
   function handleProceedToCheckout() {

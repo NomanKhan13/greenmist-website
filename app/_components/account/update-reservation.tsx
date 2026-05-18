@@ -90,7 +90,7 @@ export function UpdateReservation({
     <Sheet open={isOpen} onOpenChange={handleClose}>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle className="text-2xl">Modify Reservation</SheetTitle>
+          <SheetTitle className="text-2xl mt-6">Modify Reservation</SheetTitle>
           <SheetDescription>
             Adjust your dates, guest count, or add experiences to your retreat.
           </SheetDescription>
@@ -362,7 +362,7 @@ function ReservationEditor({
   return (
     <>
       <ScrollArea className="flex-1 h-96 px-4">
-        <div className="grid grid-cols-2 gap-4 pb-4">
+        <div className="grid sm:grid-cols-2 gap-4 pb-4">
           <div className="flex flex-col gap-2 p-3 rounded-lg border border-border/40 bg-card/50">
             <Label className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-2">
               <HugeiconsIcon icon={Calendar01Icon} size={14} /> Check-in
@@ -485,9 +485,9 @@ function ReservationEditor({
                     }
                   />
                   <FieldContent>
-                    <FieldTitle className="flex justify-between items-center w-full mb-1">
+                    <FieldTitle className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full mb-2">
                       <p>{addOn.name}</p>
-                      <p>
+                      <p className="italic">
                         <span> ₹{addOn.price}</span>
                         <span className="text-muted-foreground text-xs ml-1">
                           {addOn.isDailyPricing && "/night"}

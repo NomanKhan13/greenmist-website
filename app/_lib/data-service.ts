@@ -30,6 +30,22 @@ export async function getRoomTypes(propertySlug: string) {
   return roomTypes;
 }
 
+export async function getRoomTypes2(
+  propertyId: string,
+  checkIn: string,
+  checkOut: string,
+  guestCount: { adults: number; kids: number },
+) {
+  const { data, error } = await supabase.rpc("get_available_rooms", {
+    p_check_in: checkIn,
+    p_check_out: checkOut,
+    p_guest_count: Number(guestCount.adults + guestCount.kids),
+    p_property_id: propertyId,
+  });
+  if (error) console.error(error);
+  else return data;
+}
+
 export async function getRoomDetails(roomSlug: string | undefined | null) {
   if (!roomSlug) return;
   const { data: roomDetails, error } = await supabase
@@ -128,6 +144,31 @@ export async function checkAvailabilityByProperty(
   // console.log("FROM data service ", availability);
   return availability;
 }
+
+export async function getCheckoutRoom(
+  checkIn: Date,
+  checkOut: Date,
+  roomSlug: string,
+) {
+  const { data, error } = await supabase.rpc("get_checkout_room_data", {
+    p_room_slug: roomSlug,
+    p_check_in: checkIn,
+    p_check_out: checkOut,
+  });
+
+  if (error) {
+    console.error("Error fetching room data for checkout:", error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function getProperties2(
+  checkIn: Date,
+  checkOut: Date,
+  propertySlug: string,
+) {}
 
 export async function createBooking(bookingData: ReservationData) {
   const { data: booking, error } = await supabase

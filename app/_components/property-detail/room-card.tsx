@@ -12,14 +12,22 @@ import clsx from "clsx";
 export default function RoomCard({
   room,
   index,
+  roomsRequired,
 }: {
   room: RoomDetails;
   index: number;
+  roomsRequired: number | null;
 }) {
   const isEven = index % 2 === 0;
+
+  const isRoomAvailable =
+    room.is_active && roomsRequired
+      ? roomsRequired <= room.rooms_remaining
+      : false;
+
   const { isRoomSelected, toggleRoomSelect } = useRoomSelection(
     room.slug,
-    room.is_available,
+    isRoomAvailable,
   );
 
   return (
@@ -32,7 +40,7 @@ export default function RoomCard({
           : "border-border/40 bg-secondary dark:bg-card/40 hover:border-border/80",
       )}
     >
-      {!room.is_available && (
+      {!isRoomAvailable && (
         <div
           className={`absolute inset-0 z-20 bg-black/50 p-8 flex ${
             isEven ? "justify-start" : "justify-end"
@@ -50,7 +58,7 @@ export default function RoomCard({
           <Image
             fill
             src={tempImg} // Replace with room.thumbnail
-            alt={room.room_type_name}
+            alt={room.name}
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         </div>
@@ -66,7 +74,7 @@ export default function RoomCard({
 
           {/* Heading */}
           <h3 className="text-3xl md:text-4xl font-serif text-foreground mb-4 leading-none">
-            {room.room_type_name}
+            {room.name}
           </h3>
 
           {/* Description */}
@@ -95,7 +103,7 @@ export default function RoomCard({
               </span>
               <div className="flex items-baseline gap-1">
                 <span className="text-2xl md:text-3xl font-serif font-medium text-foreground">
-                  ₹{room.price.toLocaleString()}
+                  ₹{room.price_per_night.toLocaleString()}
                 </span>
                 <span className="text-xs text-muted-foreground">/ night</span>
               </div>
@@ -107,17 +115,17 @@ export default function RoomCard({
                   ? "bg-primary text-primary-foreground shadow-md"
                   : "bg-foreground text-background"
               }`}
-              disabled={!room.is_available}
+              disabled={!isRoomAvailable}
               onClick={toggleRoomSelect}
             >
               <span>
-                {!room.is_available
+                {!isRoomAvailable
                   ? "Not Available"
                   : isRoomSelected
                     ? "Selected"
                     : "Select"}
               </span>
-              {!isRoomSelected && room.is_available && (
+              {!isRoomSelected && isRoomAvailable && (
                 <HugeiconsIcon
                   icon={ArrowUpRight}
                   size={16}

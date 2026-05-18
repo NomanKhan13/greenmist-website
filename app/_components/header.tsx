@@ -35,22 +35,7 @@ export default function Header() {
       )}
     >
       <div className="max-w-7xl w-full mx-auto px-6 h-16 flex justify-between items-center">
-        <Link
-          href="/"
-          className="group flex items-center gap-3 shrink-0 opacity-90 hover:opacity-100 transition-all"
-        >
-          <HugeiconsIcon
-            icon={Mountain}
-            size={24}
-            color="currentColor"
-            strokeWidth={1.5}
-            className={`transition-transform ease-out group-hover:scale-110 text-primary`}
-          />
-
-          <span className="font-serif text-2xl tracking-wide font-medium">
-            GreenMist
-          </span>
-        </Link>
+        <Logo />
 
         <nav className="hidden md:flex items-center gap-10">
           {/* Pass the scroll state down to the nav links so they know what color to be */}
@@ -122,6 +107,27 @@ export function NavLink({
           makeBgTransparent ? "bg-white" : "bg-foreground",
         )}
       />
+    </Link>
+  );
+}
+
+export function Logo() {
+  return (
+    <Link
+      href="/"
+      className="group flex items-center gap-3 shrink-0 opacity-90 hover:opacity-100 transition-all"
+    >
+      <HugeiconsIcon
+        icon={Mountain}
+        size={24}
+        color="currentColor"
+        strokeWidth={1.5}
+        className={`transition-transform ease-out group-hover:scale-110 text-primary`}
+      />
+
+      <span className="font-serif text-2xl tracking-wide font-medium">
+        GreenMist
+      </span>
     </Link>
   );
 }

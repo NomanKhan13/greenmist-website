@@ -10,6 +10,7 @@ export default async function PropertyRooms({
   initialCheckIn,
   initialCheckOut,
   initialGuest,
+  propertyId,
 }: {
   propertySlug: string;
   selectedRoomSlug: string;
@@ -19,6 +20,7 @@ export default async function PropertyRooms({
     adults: number;
     kids: number;
   };
+  propertyId: string;
 }) {
   return (
     <div>
@@ -44,6 +46,7 @@ export default async function PropertyRooms({
           checkIn={initialCheckIn}
           checkOut={initialCheckOut}
           guests={initialGuest}
+          propertyId={propertyId}
         />
       </Suspense>
     </div>

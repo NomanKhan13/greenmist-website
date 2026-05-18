@@ -150,7 +150,7 @@ export default function BookingSheet({
               <SummaryRow
                 icon={Home04Icon}
                 label="Room"
-                value={roomDetails?.room_type_name}
+                value={roomDetails?.name}
               />
             </div>
 
@@ -235,7 +235,7 @@ export default function BookingSheet({
               </h3>
               <div className="space-y-3 text-sm">
                 <PriceRow
-                  label={`${formatCurrency(roomDetails.price)} x ${nights} ${nights > 1 ? "nights" : "night"}`}
+                  label={`${formatCurrency(roomDetails.price_per_night)} x ${nights} ${nights > 1 ? "nights" : "night"}`}
                   value={formatCurrency(roomTotal)}
                 />
 
@@ -426,7 +426,7 @@ export function GuestLimitExceedForRoom({
         </h2>
 
         <p className="text-sm text-muted-foreground max-w-xs">
-          {roomDetails.room_type_name} can host up to{" "}
+          {roomDetails.name} can host up to{" "}
           <strong>{roomDetails.max_adults} adults</strong>
           {` and ${roomDetails.max_kids} kids per room.`}
         </p>

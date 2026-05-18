@@ -284,7 +284,7 @@ export function CheckoutSummaryCard({
   const formattedCheckOut = format(bookingData.checkOut, "MMM dd, yyyy");
   // ================= PRICE CALCULATIONS =================
   const nights = differenceInDays(bookingData.checkOut, bookingData.checkIn);
-  const roomTotal = roomData.price * nights * bookingData.roomCount;
+  const roomTotal = roomData.price_per_night * nights * bookingData.roomCount;
   const addonsTotal = bookingData.selectedAddons.reduce((sum, addon) => {
     const addonPrice = addon.isDailyPricing
       ? addon.price * nights * bookingData.roomCount
@@ -304,7 +304,7 @@ export function CheckoutSummaryCard({
     basePriceAtBooking: roomTotal,
     addOnsAtBooking: addonsTotal,
     totalPriceAtBooking: grandTotal,
-    room_type_id: roomData.room_type_id,
+    room_type_id: roomData.id,
     check_in: bookingData.checkIn,
     check_out: bookingData.checkOut,
     property_id: roomData.property_id,
@@ -323,7 +323,7 @@ export function CheckoutSummaryCard({
             {/* Placeholder for Image */}
             <Image
               src="/hero-bg.jpg"
-              alt={`photo of ${roomData.room_type_name}`}
+              alt={`photo of ${roomData.name}`}
               fill
               className="absolute inset-0"
             />
@@ -380,11 +380,7 @@ export function CheckoutSummaryCard({
               </span>
             }
           />
-          <SummaryRow
-            icon={Home04Icon}
-            label="Room"
-            value={roomData.room_type_name}
-          />
+          <SummaryRow icon={Home04Icon} label="Room" value={roomData.name} />
         </div>
 
         {/* DYNAMIC PRICE BREAKDOWN */}
@@ -395,7 +391,7 @@ export function CheckoutSummaryCard({
           <div className="space-y-3 text-sm">
             {/* Room Cost */}
             <PriceRow
-              label={`₹${Number(roomData.price).toLocaleString()} x ${nights} ${nights > 1 ? "nights" : "night"}`}
+              label={`₹${Number(roomData.price_per_night).toLocaleString()} x ${nights} ${nights > 1 ? "nights" : "night"}`}
               value={formatCurrency(roomTotal)}
             />
 

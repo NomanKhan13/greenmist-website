@@ -2,7 +2,11 @@
 
 import { redirect } from "next/navigation";
 import CheckoutPage from "../_components/checkout/checkout";
-import { checkAvailabilityByProperty, getAddOns } from "../_lib/data-service";
+import {
+  checkAvailabilityByProperty,
+  getAddOns,
+  getCheckoutRoom,
+} from "../_lib/data-service";
 import { getValidDates } from "../_utils/validation";
 import { format } from "date-fns";
 import { AddOnProps } from "../_components/booking-drawer/booking-drawer";
@@ -112,14 +116,13 @@ export default async function page({
   const formattedCheckOut = format(checkOut, "yyyy-MM-dd");
 
   const [roomData, allAddOns] = await Promise.all([
-    checkAvailabilityByProperty(
-      new Date(formattedCheckIn),
-      new Date(formattedCheckOut),
-      { adults: Number(adults) || 2, children: Number(kids) || 0 },
-      null,
-      null,
-      room,
-    ),
+    room
+      ? getCheckoutRoom(
+          new Date(formattedCheckIn),
+          new Date(formattedCheckOut),
+          room,
+        )
+      : null,
     getAddOns(),
   ]);
 
@@ -140,7 +143,13 @@ export default async function page({
     roomData.at(0).max_kids,
   );
 
-  if (roomsRequired === null) {
+  console.log("Room data: ", roomData);
+  console.log("Req rooms: ", roomsRequired);
+
+  if (
+    roomsRequired === null ||
+    roomsRequired > Number(roomData.at(0).rooms_remaining)
+  ) {
     redirect(
       `/stays/${roomData?.at(0).property_slug}?checkIn=${format(checkIn, "yyyy-MM-dd")}&checkOut=${format(checkOut, "yyyy-MM-dd")}&room=${room}&adults=${adults}&kids=${kids}&showBooking=true`,
     );

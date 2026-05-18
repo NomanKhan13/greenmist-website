@@ -3,17 +3,20 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetFooter,
+  SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu01Icon, User02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
+import { Logo } from "./header";
 
 export function MobileMenu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" size="icon" className="rounded-full">
           <HugeiconsIcon
             icon={Menu01Icon}
             strokeWidth={1.5}
@@ -21,8 +24,13 @@ export function MobileMenu() {
           />
         </Button>
       </SheetTrigger>
-      <SheetContent>
-        <div className="grid flex-1 auto-rows-min gap-2 px-4 py-16">
+
+      <SheetContent className="flex w-full flex-col sm:max-w-md">
+        <SheetHeader className="mt-2 flex items-start">
+          <Logo />
+        </SheetHeader>
+
+        <div className="mt-16 flex flex-1 flex-col gap-6 px-6 text-3xl font-light tracking-widest">
           <SheetClose asChild>
             <Link className="py-2" href="/stays">
               Stays
@@ -38,21 +46,30 @@ export function MobileMenu() {
               Experiences
             </Link>
           </SheetClose>
+        </div>
+
+        <SheetFooter className="mt-auto pb-6">
           <SheetClose asChild>
-            <Button variant="outline" asChild>
-              <Link href="/account">
+            <Button
+              variant="outline"
+              asChild
+              className="h-12 w-full rounded-full"
+            >
+              <Link
+                href="/account"
+                className="flex items-center justify-center gap-2"
+              >
                 <HugeiconsIcon
                   icon={User02Icon}
-                  size={16}
+                  size={18}
                   color="currentColor"
                   strokeWidth={1.5}
-                  className="group-hover:translate-x-1 transition"
                 />
-                <span>Account</span>
+                <span className="text-sm font-medium">Account</span>
               </Link>
             </Button>
           </SheetClose>
-        </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

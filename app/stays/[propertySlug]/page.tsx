@@ -84,6 +84,7 @@ export default async function PropertyDetailPage({
           initialCheckOut={checkOut}
           initialGuest={guests}
           propertySlug={propertySlug}
+          propertyId={propertyDetails.id}
           selectedRoomSlug={selectedRoomSlug}
         />
 
